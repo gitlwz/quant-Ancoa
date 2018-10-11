@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
 import { Link } from 'dva/router';
-import { Checkbox, Alert, Icon } from 'quant-ui';
-import {Login} from 'quant-ui';
+import { Checkbox, Alert, Icon,Login } from 'quant-ui';
 const { Tab, UserName, Password, Submit } = Login;
 
 class LoginPage extends Component {

@@ -40,7 +40,7 @@
     "postcss-flexbugs-fixes": "3.2.0",
     "postcss-loader": "2.0.8",
     "promise": "8.0.1",
-    "quant-ui": "^0.2.134",
+    "quant-ui": "^0.2.136",
     "raf": "3.4.0",
     "react": "^16.4.1",
     "react-container-query": "^0.11.0",

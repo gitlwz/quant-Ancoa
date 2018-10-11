@@ -1,5 +1,4 @@
 import { routerRedux } from 'dva/router';
-import { stringify } from 'qs';
 import { setAuthority } from '../utils/authority';
 import { reloadAuthorized } from '../utils/Authorized';
 import { getPageQuery } from '../utils/utils';
@@ -21,7 +20,6 @@ export default {
                 type: 'changeLoginStatus',
                 payload: response,
             });
-            // Login successfully
             if (response.status === 'ok') {
                 reloadAuthorized();
                 const urlParams = new URL(window.location.href);

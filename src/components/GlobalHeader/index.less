@@ -41,67 +41,68 @@
             background: @primary-1;
         }
     }
-    .right {
-        float: right;
+    
+}
+.RightContent-right {
+    float: right;
+    height: 100%;
+    .action {
+        cursor: pointer;
+        padding: 0 12px;
+        display: inline-block;
+        transition: all 0.3s;
         height: 100%;
-        .action {
-            cursor: pointer;
-            padding: 0 12px;
-            display: inline-block;
-            transition: all 0.3s;
-            height: 100%;
-            >i {
-                font-size: 16px;
-                color: @text-color;
-            }
-            &:hover,
-            & .ant-popover-open {
-                background: @primary-1;
-            }
-        }
-        .search {
-            padding: 0;
-            margin: 0 12px;
-            &:hover {
-                background: transparent;
-            }
-        }
-        .account {
-            .avatar {
-                margin: 18px 8px 20px 0;
-                vertical-align: middle;
-            }
-        }
-        .language-icon{
-            cursor: pointer;
-            height: 100%;
-            padding: 0 12px;
-            display: inline-block;
-            transition: all 0.3s;
+        >i {
             font-size: 16px;
-            &:hover {
-                background: @primary-1;
-            }
+            color: @text-color;
         }
-        .colormenu {
-            padding: 0 12px;
-            display: inline-block;
-            height: 100%;
-            cursor: pointer;
-            transition: all 0.3s;
-            &:hover {
-                background: @primary-1;
-            }
+        &:hover,
+        & .ant-popover-open {
+            background: @primary-color;
         }
-        .screenFull {
-            display: inline-block;
-            padding: 0 12px;
-            height: 100%;
-            cursor: pointer;
-            transition: all 0.3s;
-            &:hover {
-                background: @primary-1;
-            }
+    }
+    .search {
+        padding: 0;
+        margin: 0 12px;
+        &:hover {
+            background: transparent;
+        }
+    }
+    .account {
+        .avatar {
+            margin: 18px 8px 20px 0;
+            vertical-align: middle;
+        }
+    }
+    .language-icon{
+        cursor: pointer;
+        height: 100%;
+        padding: 0 12px;
+        display: inline-block;
+        transition: all 0.3s;
+        font-size: 14px;
+        &:hover {
+            background: @primary-color;
+        }
+    }
+    .colormenu {
+        padding: 0 12px;
+        display: inline-block;
+        height: 100%;
+        cursor: pointer;
+        transition: all 0.3s;
+        &:hover {
+            background: @primary-color;
+        }
+    }
+    .screenFull {
+        display: inline-block;
+        padding: 0 12px;
+        height: 100%;
+        cursor: pointer;
+        transition: all 0.3s;
+        &:hover {
+            background: @primary-color;
         }
     }
 }

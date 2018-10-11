@@ -15,7 +15,8 @@ import { getRoutes } from '../utils/utils';
 import Authorized from '../utils/Authorized';
 import { getMenuData } from '../common/menu';
 import config from "../common/config.js";
-const { Content, Header, Footer } = Layout;
+import Header from "../components/Header";
+const { Content } = Layout;
 const { AuthorizedRoute, check } = Authorized;
 
 /**
@@ -171,9 +172,10 @@ class BasicLayout extends React.PureComponent {
         } = this.props;
         const { isMobile: mb } = this.state;
         const baseRedirect = this.getBaseRedirect();
+        let isTop = config.isTop;
         const layout = (
             <Layout>
-                <SiderMenu
+                {isTop && !isMobile ? null : <SiderMenu
                     logo={collapsed?config.LOGO:config.LOGOANTTITLE}
                     Authorized={Authorized}
                     menuData={getMenuData()}
@@ -181,15 +183,18 @@ class BasicLayout extends React.PureComponent {
                     location={location}
                     isMobile={mb}
                     onCollapse={this.handleMenuCollapse}
-                />
-                <Layout>
-                    <Header style={{ padding: 0 }}>
-                        <GlobalHeader
-                            collapsed={collapsed}
-                            isMobile={mb}
-                            onCollapse={this.handleMenuCollapse}
-                        />
-                    </Header>
+                />}
+                <Layout style={{height:isTop?"100vh":""}}>
+                    <Header
+                        logo={collapsed?config.LOGO:config.LOGOANTTITLE}
+                        Authorized={Authorized}
+                        menuData={getMenuData()}
+                        collapsed={collapsed}
+                        location={location}
+                        isMobile={mb}
+                        onCollapse={this.handleMenuCollapse}
+                        {...this.props}
+                    />
                     <Content style={{ margin: '24px 24px 0', height: '100%' }}>
                         <Switch>
                             {redirectData.map(item => (

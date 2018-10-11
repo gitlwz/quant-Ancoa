@@ -17,6 +17,7 @@ let zhConfig = {
     "Help": flowImg,                        //帮助文档  bas64图片 或者 url
     "privacy": "当前版本:0.125",              //关于
     "flowImg": flowImg,                      //首页流程图
+    "isTop":true,                               //导航栏是否在顶部
     "FOOTER": <span>Copyright <Icon type="copyright" /> 2018 量投极速柜台交易系统</span>  //页脚
 }
 
