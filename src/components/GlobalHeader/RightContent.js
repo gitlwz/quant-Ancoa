@@ -21,20 +21,7 @@ function colorhandleMenuClick(e) {
     setCurrentColor(e.key)
     refreshColor()
 }
-const menu = (
-    <Menu className={'menu'} selectedKeys={[]} onClick={this.onMenuClick}>
-        <Menu.Item key="reset">
-            <Icon type="user" />{$("修改密码")}
-        </Menu.Item>
-        <Menu.Item key="delete">
-            <Icon type="delete" />{$("清空布局")}
-        </Menu.Item>
-        <Menu.Divider />
-        <Menu.Item key="logout">
-            <Icon type="logout" />{$("退出登录")}
-        </Menu.Item>
-    </Menu>
-);
+
 const languagemenu = (
     <Menu
         onClick={languagehandleMenuClick}
@@ -82,7 +69,20 @@ class GlobalHeaderRight extends PureComponent {
         }
     }
     render() {
-        
+        const menu = (
+            <Menu className={'menu'} selectedKeys={[]} onClick={this.onMenuClick}>
+                <Menu.Item key="reset">
+                    <Icon type="user" />{$("修改密码")}
+                </Menu.Item>
+                <Menu.Item key="delete">
+                    <Icon type="delete" />{$("清空布局")}
+                </Menu.Item>
+                <Menu.Divider />
+                <Menu.Item key="logout">
+                    <Icon type="logout" />{$("退出登录")}
+                </Menu.Item>
+            </Menu>
+        );
         let languageData = "中文";
         if (getCurrentLanguage() === "en_US") {
             languageData = "English"
