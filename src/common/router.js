@@ -98,7 +98,14 @@ export const getRouterData = app => {
     '/': {
       component: dynamicWrapper(app, ['login'], () => import('../layouts/BasicLayout')),
     },
-    
+    '/analytics': {
+        component: dynamicWrapper(app, ['login'], () => import('../routes/analytics')),
+      },
+      
+
+
+
+
     '/exception/403': {
       component: dynamicWrapper(app, [], () => import('../routes/Exception/403')),
     },

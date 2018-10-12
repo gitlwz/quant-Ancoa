@@ -4,6 +4,7 @@ import logger from 'redux-logger';
 import 'moment/locale/zh-cn';
 import "./theme/index.js";
 import "./index.less";
+import './language';
 // 1. Initialize
 const app = dva(
     process.env.NODE_ENV === "development" ? {
