@@ -104,7 +104,10 @@ export const getRouterData = app => {
         '/orderview': {
             component: dynamicWrapper(app, ['orderview'], () => import('../routes/orderview')),
         },
-
+        '/alerts': {
+            component: dynamicWrapper(app, ['alerts'], () => import('../routes/alerts')),
+        },
+      
 
 
 
