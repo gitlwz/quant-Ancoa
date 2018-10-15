@@ -44,13 +44,13 @@ class Member extends Component {
     render() {
 
         return (
-            <div className="analytics-sellSide anc-block-height">
+            <div className="orderview-sellSide anc-block-height">
 
                 {data.map(({ left, right }) => {
                     return (
-                        <div className="analytics-sellSide-content">
-                            <div className="analytics-left">{left}</div>
-                            <div className="analytics-right">{right}</div>
+                        <div className="orderview-sellSide-content">
+                            <div className="orderview-left">{left}</div>
+                            <div className="orderview-right">{right}</div>
                         </div>
                     )
                 })
@@ -60,7 +60,7 @@ class Member extends Component {
         );
     }
 }
-export default connect(({ analytics }) => {
+export default connect(({ orderview }) => {
     return {
     }
 })(
