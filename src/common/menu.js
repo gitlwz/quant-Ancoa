@@ -2,9 +2,14 @@ import { isUrl } from '../utils/utils';
 
 const menuData = [
     {
-        name: '页面1',
+        name: '交易视图',
         icon: 'user',
         path: 'analytics',
+        authority: 'admin',
+    },{
+        name: '订单视图',
+        icon: 'user',
+        path: 'orderview',
         authority: 'admin',
     },
     {
