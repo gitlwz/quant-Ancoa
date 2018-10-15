@@ -31,18 +31,56 @@ let config = {
         // endValue: now,
         filterMode: 'empty'
     },
+    tooltip: {
+        show: true,
+        trigger: "item",
+        formatter: function (params) {
+            if (params.seriesName == "a2") {
+                return `<div style="padding: 20px;">
+                    <h2 style="color: #FFFFFF;">Alert Details</h2>
+                    <table frame="void"  cellpadding="4px" rules="none">
+                        <tr>
+                            <td>ID</td>
+                            <td>
+                                1684
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>ID</td>
+                            <td>
+                            <div class="anc-echats-break">
+                                   的内容很长的内容很长的内容很长的内容
+                            </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>`
+            }
+            return null
+        }
+    },
     yAxis: {},
     series: [{
+        name: "a1",
         symbolSize: 20,
         data: [],
-        type: 'scatter'
-    }]
+        type: 'scatter',
+    }, {
+        name: "a2",
+        symbolSize: 20,
+        data: [],
+        type: 'scatter',
+
+        symbol: "image://data:image/gif;base64,R0lGODlhEAAQAMQAAORHHOVSKudfOulrSOp3WOyDZu6QdvCchPGolfO0o/XBs/fNwfjZ0frl3/zy7////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAkAABAALAAAAAAQABAAAAVVICSOZGlCQAosJ6mu7fiyZeKqNKToQGDsM8hBADgUXoGAiqhSvp5QAnQKGIgUhwFUYLCVDFCrKUE1lBavAViFIDlTImbKC5Gm2hB0SlBCBMQiB0UjIQA7"
+    },]
 }
 
-function option(data) {
+function option(data, data2) {
     return {
         series: [{
             data: data,
+        }, {
+            data: data2,
         }]
     }
 };
@@ -74,8 +112,13 @@ class Member extends Component {
         setInterval(() => {
             data.shift();
             data.push(randomData());
-            this.myChart.setOption(option(data));
+            let data2 = data.map((ele) => {
+                let _ele = { value: [ele.value[0], 100] }
+                return { ..._ele }
+            })
+            this.myChart.setOption(option(data, data2));
         }, 2000)
+        this.myChart
         window.addEventListener("resize", this.resize);
     }
     componentWillUnmount = () => {
