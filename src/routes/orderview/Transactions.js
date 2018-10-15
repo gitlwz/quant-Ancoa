@@ -35,7 +35,7 @@ class Member extends Component {
 
         return (
             <div className="anc-block-height">
-                <Table columns={columns} dataSource={dataSource} size="middle" />
+                <Table columns={columns} dataSource={dataSource} size="middle" bordered />
             </div>
         );
     }
