@@ -98,7 +98,7 @@ class Member extends Component {
         const { item, dispatch, echartsArray } = this.props;
         let _echarts = echartsArray.find((ele) => ele.key == item.key);
         if (!!_echarts) {
-
+            _echarts.echart = this.myChart
         } else {
             echartsArray.push({
                 key: item.key,

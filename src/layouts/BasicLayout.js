@@ -184,7 +184,7 @@ class BasicLayout extends React.PureComponent {
                     isMobile={mb}
                     onCollapse={this.handleMenuCollapse}
                 />}
-                <Layout style={{height:isTop?"100vh":""}}>
+                <Layout style={{height:isTop?"":""}}>
                     <Header
                         logo={collapsed?config.LOGO:config.LOGOANTTITLE}
                         Authorized={Authorized}

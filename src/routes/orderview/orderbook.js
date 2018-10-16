@@ -251,7 +251,7 @@ class Member extends Component {
         const { item, dispatch, echartsArray } = this.props;
         let _echarts = echartsArray.find((ele) => ele.key == item.key);
         if (!!_echarts) {
-
+            _echarts.echart = this.myChart
         } else {
             echartsArray.push({
                 key: item.key,
@@ -271,11 +271,8 @@ class Member extends Component {
 
         return (
             <div id="orderview-trade-view" style={{ width: "100%", height: `calc(100% - 36px)` }}>
-
-
             </div>
-
-        );
+            );
     }
 }
 export default connect(({ orderview }) => {

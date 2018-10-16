@@ -130,7 +130,7 @@ class Member extends Component {
                         <Button>OverLay R</Button>
                     </span>
                 </Form>
-                <div>
+                <div className="ancoa-content">
                     <Dragact
                         layout={fakeData} //必填项
                         col={16} //必填项
