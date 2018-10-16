@@ -107,7 +107,10 @@ export const getRouterData = app => {
         '/alerts': {
             component: dynamicWrapper(app, ['alerts'], () => import('../routes/alerts')),
         },
-      
+        '/trending': {
+            component: dynamicWrapper(app, ['trending'], () => import('../routes/trending')),
+        },
+        
 
 
 

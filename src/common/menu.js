@@ -19,6 +19,12 @@ const menuData = [
         authority: 'admin',
     },
     {
+        name: '预警统计视图',
+        icon: 'area-chart',
+        path: 'trending',
+        authority: 'admin',
+    },
+    {
         name: '账户',
         icon: 'user',
         path: 'user',

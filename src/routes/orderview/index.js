@@ -40,7 +40,7 @@ class Member extends Component {
                 <Transactions item={item} />
             </DragactCard>
         } else if (item.key == 1) {
-            return <DragactCard item={item} provided={provided} title={"Transactions"}>
+            return <DragactCard item={item} provided={provided} title={"Order Book"}>
                 <OrderBook item={item} />
             </DragactCard>
         }  else if (item.key == 2) {

@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
 import echarts from 'echarts';
-var myData = ['大栅栏', '天安门', '故宫', '景山', '北海公园', '后海', '什刹海', '西单', '玉渊潭', '中央电视塔', '东单', '王府井', '南锣鼓巷', '工体', '潘家园', '琉璃厂'];
+var myData = ['110.82', '110.21', '109.6', '109.1'];
 let option = {
         legend: {
+            show:false,
             data: ['BID', 'ASK'],
             top: 4,
             right: '20%',
@@ -174,30 +175,37 @@ let option = {
                 name: 'BID',
                 type: 'bar',
                 barGap: 20,
-                barWidth: 20,
+                stack: '入',
+                barWidth: 30,
                 label: {
                     normal: {
-                        show: false,
-                    },
-                    emphasis: {
                         show: true,
-                        position: 'left',
-                        offset: [0, 0],
-                        textStyle: {
-                            color: '#fff',
-                            fontSize: 14,
-                        },
                     },
+                    
                 },
                 itemStyle: {
                     normal: {
                         color: '#659F83',
                     },
-                    emphasis: {
-                        color: '#08C7AE',
+                },
+                data: ["", "", 550,200],
+            },{
+                name: 'BID2',
+                type: 'bar',
+                barGap: 20,
+                barWidth: 30,
+                stack: '入',
+                label: {
+                    normal: {
+                        show: true,
                     },
                 },
-                data: [389, 259, 262, 324, 232, 176, 196, 214, 133, 370, 268, 360, 185, 392, 392, 153],
+                itemStyle: {
+                    normal: {
+                        color: '#2E8534',
+                    },
+                },
+                data: ["","","530",""],
             },
 
 
@@ -205,32 +213,40 @@ let option = {
                 name: 'ASK',
                 type: 'bar',
                 barGap: 20,
-                barWidth: 20,
+                stack: '出',
+                barWidth: 30,
                 xAxisIndex: 2,
                 yAxisIndex: 2,
                 label: {
                     normal: {
-                        show: false,
-                    },
-                    emphasis: {
                         show: true,
-                        position: 'right',
-                        offset: [0, 0],
-                        textStyle: {
-                            color: '#fff',
-                            fontSize: 14,
-                        },
                     },
                 },
                 itemStyle: {
                     normal: {
                         color: '#F68989',
                     },
-                    emphasis: {
-                        color: '#F94646',
+                },
+                data: [121, 388, 233],
+            },{
+                name: 'ASK2',
+                type: 'bar',
+                stack: '出',
+                barGap: 20,
+                barWidth: 30,
+                xAxisIndex: 2,
+                yAxisIndex: 2,
+                label: {
+                    normal: {
+                        show: true,
                     },
                 },
-                data: [121, 388, 233, 309, 133, 308, 297, 283, 349, 273, 229, 238, 224, 291, 185, 203],
+                itemStyle: {
+                    normal: {
+                        color: '#C02F52',
+                    },
+                },
+                data: [121, 388, 233],
             }
         ],
 };
