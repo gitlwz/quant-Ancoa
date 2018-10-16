@@ -5,10 +5,6 @@ import AlertsHeader from './AlertsHeader';
 import AlertTable from './AlertTable';
 import "./index.less";
 
-function hasErrors(fieldsError) {
-    return Object.keys(fieldsError).some(field => fieldsError[field]);
-}
-
 class Alerts extends Component {
     render() {
         return (
@@ -20,15 +16,25 @@ class Alerts extends Component {
                 </Card>
                 
                 <Row style={{marginTop: 12}} gutter={12}>
-                    <Col span={8} ><Card bordered={false}>
-                    <AlertTable />
-                    </Card></Col>
-                        <Col span={8} ><Card bordered={false}>
-                        <AlertTable />
-                    </Card></Col>
-                        <Col span={8} ><Card bordered={false}>
-                        <AlertTable />
-                    </Card></Col>
+
+                    <Col span={8} >
+                        <Card bordered={false}>
+                            <AlertTable />
+                        </Card>
+                    </Col>
+
+                    <Col span={8} >
+                        <Card bordered={false}>
+                            <AlertTable />
+                        </Card>
+                    </Col>
+
+                    <Col span={8} >
+                        <Card bordered={false}>
+                            <AlertTable />
+                        </Card>
+                    </Col>
+                    
                 </Row>
 
             </div>

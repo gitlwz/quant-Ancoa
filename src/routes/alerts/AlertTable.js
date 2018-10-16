@@ -1,12 +1,42 @@
 import React from 'react';
 import { Table } from 'quant-ui';
+import { getLeveColor } from './AlertLevel';
+import './alerttable.less';
+
+const STATUS_UNASSIGNED = 'Unassigned';
+const STATUS_OPEN = 'Open';
+const STATUS_RESOLVED = 'Resolved';
+const STATUS_CLOSED = 'Closed';
+
+const statusColor = {
+    [STATUS_UNASSIGNED]: '',
+    [STATUS_OPEN]: 'skyblue',
+    [STATUS_RESOLVED]: 'lightgreen',
+    [STATUS_CLOSED]: 'silver',
+}
+
+function renderStatus(text) {
+    return (
+        <div style={{ background: statusColor[text] }} className="alert-table-tag">
+            {text}
+        </div>
+    )
+}
+
+function renderSeverity(text, record) {
+    return (
+        <div style={{ background: getLeveColor(record.severity) }} className="alert-table-tag">
+            {text}
+        </div>
+    )
+}
 
 const alertColumns = [
     {
         title: 'ID',
         dataIndex: 'id',
         key: 'id',
-        sorter: (a, b) => a - b,
+        sorter: (a, b) => a.id - b.id,
     }, {
         title: 'Status',
         dataIndex: 'status',
@@ -62,7 +92,7 @@ const alertColumns = [
 const alertDataSource = [{
     key: '1',
     id: '57',
-    status: 'Unassigned',
+    status: STATUS_UNASSIGNED,
     priority: 'Medium',
     classification: 'Unclassified',
     icon: 'user',
@@ -75,45 +105,45 @@ const alertDataSource = [{
     ids: '24|90|80',
     desc: 'Security "PF 1808 potential wash the closing price. 1,096.50.',
 }, {
-    key: '1',
-    id: '57',
-    status: 'Unassigned',
+    key: '2',
+    id: '58',
+    status: STATUS_OPEN,
     priority: 'Medium',
     classification: 'Unclassified',
     icon: 'user',
     type: 'Wash Trading Alert',
     name: ' ',
-    severity: 78,
+    severity: 83,
     security: 'PF1808',
     instrument: 'Futures',
     currency: 'USD',
     ids: '24|90|80',
     desc: 'Security "PF 1808 potential wash the closing price. 1,096.50.',
 },{
-    key: '1',
-    id: '57',
-    status: 'Unassigned',
+    key: '3',
+    id: '67',
+    status: STATUS_RESOLVED,
     priority: 'Medium',
     classification: 'Unclassified',
     icon: 'user',
     type: 'Wash Trading Alert',
     name: ' ',
-    severity: 78,
+    severity: 55,
     security: 'PF1808',
     instrument: 'Futures',
     currency: 'USD',
     ids: '24|90|80',
     desc: 'Security "PF 1808 potential wash the closing price. 1,096.50.',
 },{
-    key: '1',
-    id: '57',
-    status: 'Unassigned',
+    key: '4',
+    id: '87',
+    status: STATUS_CLOSED,
     priority: 'Medium',
     classification: 'Unclassified',
     icon: 'user',
     type: 'Wash Trading Alert',
     name: ' ',
-    severity: 78,
+    severity: 24,
     security: 'PF1808',
     instrument: 'Futures',
     currency: 'USD',
@@ -123,12 +153,21 @@ const alertDataSource = [{
 
 const AlertTable = ({dataSource = alertDataSource, columns = alertColumns}) => {
 
+    const displayColumns = columns.map(c => {
+        if (c.dataIndex === 'status') {
+            c.render = renderStatus;
+        } else if (c.dataIndex === 'severity') {
+            c.render = renderSeverity;
+        }
+        return c;
+    })
+
     return (
         <Table 
             dataSource={dataSource}
-            columns={columns}
+            columns={displayColumns}
             pagination={false}
-            scroll={{x: 1900}}
+            scroll={{x: 1680}}
         />
     );
 };
