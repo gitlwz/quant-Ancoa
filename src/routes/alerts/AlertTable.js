@@ -163,12 +163,15 @@ const AlertTable = ({dataSource = alertDataSource, columns = alertColumns}) => {
     })
 
     return (
-        <Table 
-            dataSource={dataSource}
-            columns={displayColumns}
-            pagination={false}
-            scroll={{x: 1680}}
-        />
+        <div className="anc-block-height">
+            <Table 
+                dataSource={dataSource}
+                columns={displayColumns}
+                pagination={false}
+                scroll={{x: 1680}}
+            />
+        </div>
+        
     );
 };
 

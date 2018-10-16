@@ -34,7 +34,6 @@ let config = {
     tooltip: {
         show: true,
         trigger: "item",
-        triggerOn:"click",
         enterable:true,
         formatter: function (params) {
             if (params.seriesName == "a2") {
