@@ -3,12 +3,12 @@ import { isUrl } from '../utils/utils';
 const menuData = [
     {
         name: '交易视图',
-        icon: 'user',
+        icon: 'dollar',
         path: 'analytics',
         authority: 'admin',
     },{
         name: '订单视图',
-        icon: 'user',
+        icon: 'exception',
         path: 'orderview',
         authority: 'admin',
     },
@@ -23,6 +23,11 @@ const menuData = [
         icon: 'area-chart',
         path: 'trending',
         authority: 'admin',
+    },
+    {
+        name: '市场行情视图',
+        icon: 'box-plot',
+        path: 'marketview',
     },
     {
         name: '账户',

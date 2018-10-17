@@ -110,7 +110,9 @@ export const getRouterData = app => {
         '/trending': {
             component: dynamicWrapper(app, ['trending'], () => import('../routes/trending')),
         },
-        
+        "/marketview": {
+            component: dynamicWrapper(app, ['marketview'], () => import('../routes/marketview/index.js')),
+        },
 
 
 
