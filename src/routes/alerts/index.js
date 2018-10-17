@@ -4,7 +4,7 @@ import { Form, Row, Col, Card,Dragact } from "quant-ui"
 import AlertsHeader from './AlertsHeader';
 import AlertTable from './AlertTable';
 import DragactCard from "../../components/DragactCard/index.js"
-import "./index.less";
+import "./index.css";
 
 
 const fakeData = [
@@ -34,7 +34,10 @@ class Alerts extends Component {
     rednerDragact = (item, provided) => {
         if (item.key == 0) {
             return <DragactCard item={item} provided={provided} title={"交易视图"}>
-                <AlertTable item={item} />
+                <AlertTable 
+                    item={item} 
+                    history={this.props.history}
+                />
             </DragactCard>
         } else if (item.key == 1) {
             return <DragactCard item={item} provided={provided} title={"Sell Side"}>

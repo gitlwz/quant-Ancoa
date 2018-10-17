@@ -1,7 +1,6 @@
 import React from 'react';
 import { Table } from 'quant-ui';
 import { getLeveColor } from './AlertLevel';
-import './alerttable.less';
 
 const STATUS_UNASSIGNED = 'Unassigned';
 const STATUS_OPEN = 'Open';
@@ -13,22 +12,6 @@ const statusColor = {
     [STATUS_OPEN]: 'skyblue',
     [STATUS_RESOLVED]: 'lightgreen',
     [STATUS_CLOSED]: 'silver',
-}
-
-function renderStatus(text) {
-    return (
-        <div style={{ background: statusColor[text] }} className="alert-table-tag">
-            {text}
-        </div>
-    )
-}
-
-function renderSeverity(text, record) {
-    return (
-        <div style={{ background: getLeveColor(record.severity) }} className="alert-table-tag">
-            {text}
-        </div>
-    )
 }
 
 const alertColumns = [
@@ -162,10 +145,18 @@ const alertDataSource = [{
     desc: 'Security "PF 1808 potential wash the closing price. 1,096.50.',
 },];
 
-const AlertTable = ({dataSource = alertDataSource, columns = alertColumns}) => {
 
-    const displayColumns = columns
+    
+const AlertTable = ({history, dataSource = alertDataSource, columns = alertColumns}) => {
+    
+    const displayColumns = columns;
 
+    const onRow = (record) => ({
+        onClick: () => {
+            history.push(`/alertdetail/${record.id}`)
+        }
+    })
+    
     return (
         <div className="anc-block-height">
             <Table 
@@ -175,6 +166,7 @@ const AlertTable = ({dataSource = alertDataSource, columns = alertColumns}) => {
                 scroll={{x: 1680}}
                 size="middle" 
                 bordered
+                onRow={onRow}
             />
         </div>
         

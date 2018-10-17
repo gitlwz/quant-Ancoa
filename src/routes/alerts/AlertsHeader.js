@@ -1,7 +1,7 @@
 import React from 'react';
-import { Form, Input, Button } from "quant-ui"
+import { Form, Input, Button, Row, Col } from "quant-ui"
 import AlertLevel from './AlertLevel';
-import "./header.less";
+import "./header.css";
 
 const FormItem = Form.Item;
 const ButtonGroup = Button.Group;
@@ -10,8 +10,8 @@ function AlertsHeader (props) {
     const { getFieldDecorator, getFieldValue } = props.form;
 
     return (
-        <div style={{display: 'flex', justifyContent: 'space-between'}}>
-            <div>
+        <Row type="flex" justify='space-between'>
+            <Col>
                 <Form layout="inline" onSubmit={props.handleSubmit}>
                     <FormItem>
                         {getFieldDecorator('issue')(
@@ -35,8 +35,8 @@ function AlertsHeader (props) {
                         </Button>
                     </FormItem>
                 </Form>
-            </div>
-            <div>
+            </Col>
+            <Col>
                 <FormItem className="header-item" >
                     <ButtonGroup>
                         <Button type="primary" >
@@ -57,8 +57,8 @@ function AlertsHeader (props) {
                         Configuration
                     </Button>
                 </FormItem>
-            </div>
-        </div>
+            </Col>
+        </Row>
     );
 };
 
