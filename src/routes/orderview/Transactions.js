@@ -3,28 +3,61 @@ import { connect } from 'dva';
 import { Table } from "quant-ui";
 const dataSource = [{
     key: '1',
-    name: '胡彦斌',
-    age: 32,
-    address: '西湖区湖底公园1号'
+    Time: '0.3:01:49.000',
+    MsgType: "Trade",
+    ActiveUser: 'jolenetan',
+    type:"1",
   }, {
     key: '2',
-    name: '胡彦祖',
-    age: 42,
-    address: '西湖区湖底公园1号'
+    Time: '0.3:01:49.000',
+    MsgType: "Order",
+    ActiveUser: 'jolenetan',
+    type:"2",
+  }, {
+    key: '3',
+    Time: '0.3:01:49.000',
+    MsgType: "Order",
+    ActiveUser: 'jolenetan',
+    type:"3",
+  }, {
+    key: '4',
+    Time: '0.3:01:49.000',
+    MsgType: "Order",
+    ActiveUser: 'jolenetan',
+    type:"2",
+  }, {
+    key: '5',
+    Time: '0.3:01:49.000',
+    MsgType: "Order",
+    ActiveUser: 'jolenetan',
+    type:"1",
   }];
   
   const columns = [{
-    title: '姓名',
-    dataIndex: 'name',
-    key: 'name',
+    title: '',
+    dataIndex: 'index',
+    key: 'index',
+    render:(text,record,index) => {
+        return <span>{index + 1}</span>
+    }
+  },{
+    title: 'Time',
+    dataIndex: 'Time',
+    key: 'Time',
+    
   }, {
-    title: '年龄',
-    dataIndex: 'age',
-    key: 'age',
+    title: 'MsgType',
+    dataIndex: 'MsgType',
+    key: 'MsgType',
+    onCell:(record)=>{
+        return {
+            className:"orderview-Transactions" + record.type
+        }
+    }
   }, {
-    title: '住址',
-    dataIndex: 'address',
-    key: 'address',
+    title: 'ActiveUser',
+    dataIndex: 'ActiveUser',
+    key: 'ActiveUser',
   }];
 class Member extends Component {
     constructor(props) {
@@ -34,8 +67,8 @@ class Member extends Component {
     render() {
 
         return (
-            <div className="anc-block-height">
-                <Table columns={columns} dataSource={dataSource} size="middle" bordered />
+            <div className="anc-block-height orderview-Transactions">
+                <Table  columns={columns} dataSource={dataSource} size="middle" bordered />
             </div>
         );
     }

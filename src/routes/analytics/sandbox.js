@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
 import echarts from 'echarts';
-import moment from 'moment';
+import waring from '../../assets/waring.png';
 function randomData() {
     now = new Date(+now + nextTime);
     value = value + Math.random() * 21 - 10;
@@ -72,7 +72,7 @@ let config = {
         data: [],
         type: 'scatter',
 
-        symbol: "image://data:image/gif;base64,R0lGODlhEAAQAMQAAORHHOVSKudfOulrSOp3WOyDZu6QdvCchPGolfO0o/XBs/fNwfjZ0frl3/zy7////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAkAABAALAAAAAAQABAAAAVVICSOZGlCQAosJ6mu7fiyZeKqNKToQGDsM8hBADgUXoGAiqhSvp5QAnQKGIgUhwFUYLCVDFCrKUE1lBavAViFIDlTImbKC5Gm2hB0SlBCBMQiB0UjIQA7"
+        symbol: "image://" + waring
     },]
 }
 
