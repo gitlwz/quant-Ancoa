@@ -41,6 +41,12 @@ const alertColumns = [
         title: 'Status',
         dataIndex: 'status',
         key: 'status',
+        onCell:(record)=>{
+            return {
+                style:{ background: statusColor[record.status] }
+            }
+        }
+
     }, {
         title: 'Priority',
         dataIndex: 'priority',
@@ -65,6 +71,11 @@ const alertColumns = [
         title: 'Severity',
         dataIndex: 'severity',
         key: 'severity',
+        onCell:(record)=>{
+            return {
+                style:{ background: getLeveColor(record.severity) }
+            }
+        }
     }, {
         title: 'Trigger Security',
         dataIndex: 'security',
@@ -153,14 +164,7 @@ const alertDataSource = [{
 
 const AlertTable = ({dataSource = alertDataSource, columns = alertColumns}) => {
 
-    const displayColumns = columns.map(c => {
-        if (c.dataIndex === 'status') {
-            c.render = renderStatus;
-        } else if (c.dataIndex === 'severity') {
-            c.render = renderSeverity;
-        }
-        return c;
-    })
+    const displayColumns = columns
 
     return (
         <div className="anc-block-height">
@@ -169,6 +173,8 @@ const AlertTable = ({dataSource = alertDataSource, columns = alertColumns}) => {
                 columns={displayColumns}
                 pagination={false}
                 scroll={{x: 1680}}
+                size="middle" 
+                bordered
             />
         </div>
         
