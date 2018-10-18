@@ -3,11 +3,11 @@ import { connect } from 'dva';
 import echarts from 'echarts';
 import waring from '../../assets/waring.png';
 function randomData() {
-    now = new Date(+now + nextTime);
+    now = +now + nextTime;
     value = value + Math.random() * 21 - 10;
     return {
         name: now.toString(),
-        value: [now,
+        value: [echarts.format.formatTime('yyyy-MM-dd hh:mm:ss',now),
             Math.round(value)
         ]
     }
@@ -23,14 +23,24 @@ for (var i = 0; i < 10; i++) {
 
 let config = {
     xAxis: {
-        type: "time"
+        type: "time",
+        // min:echarts.format.formatTime('yyyy-MM-dd hh:mm:ss',new Date())
     },
-    dataZoom: {
+    dataZoom: [{
         type: "inside",
         // startValue: new Date(+now - 4 * nextTime),
         // endValue: now,
         filterMode: 'empty'
-    },
+    },{
+        show: true,
+        bottom: 10,
+        type: 'slider',
+        start:30,
+        end:100,
+        // bottom: 10,
+        // handleIcon: 'M10.7,11.9H9.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4h1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z',
+        // handleSize: '105%'
+    }],
     tooltip: {
         show: true,
         trigger: "item",
