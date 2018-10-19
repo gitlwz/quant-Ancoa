@@ -7,25 +7,23 @@ const Option = Select.Option;
 const AlertDetailHeader = (props) => {
     const { getFieldDecorator } = props.form;
     return (
-        <div>
+        <div style={{marginBottom: 5}}>
             <Row type="flex" justify="space-between">
 
                 <Col>
                     <Form layout="inline">
+                        <FormItem> View in: </FormItem>
                         <FormItem>
-                            View in:
+                            <Button type="primary">TradeView</Button>
                         </FormItem>
                         <FormItem>
-                            <Button>TradeView</Button>
+                            <Button type="primary">OrderView</Button>
                         </FormItem>
                         <FormItem>
-                            <Button>OrderView</Button>
+                            <Button type="primary">DataView</Button>
                         </FormItem>
                         <FormItem>
-                            <Button>DataView</Button>
-                        </FormItem>
-                        <FormItem>
-                            <Button>NetworkView</Button>
+                            <Button type="primary">NetworkView</Button>
                         </FormItem>
                     </Form>
                 </Col>

@@ -1,23 +1,25 @@
 import React from 'react';
 
-let gradientColors;
+let gradientColors = [
+    {red: 102, green: 238, blue: 68, position: 0},
+    {red: 255, green: 238, blue: 102, position: 30},
+    {red: 255, green: 51, blue: 34, position: 100},
+];
 
 function getRgbColor(red, green, blue) {
     return `rgb(${red},${green},${blue})`;
 }
 
-function AlertLevel ({height = 30, width = 300, colors = [
-    {red: 102, green: 238, blue: 68, position: 0},
-    {red: 255, green: 238, blue: 102, position: 30},
-    {red: 255, green: 51, blue: 34, position: 100},
-]}) {
+function AlertLevel ({height = 30, width = 300, colors = gradientColors}) {
     gradientColors = colors;
+
     let levelBackground;
     if (!colors || colors.length === 0) {
-        levelBackground = 'white';
-    } else if (colors.length === 1) {
+        levelBackground = 'white'; // 无色可选, 默认为白色
+    } else if (colors.length === 1) { // 单色
         levelBackground = getRgbColor(colors[0].red, colors[0].green, colors[0].blue);
     } else {
+        // 将颜色数组拼接成 CSS 渐变色
         const gradient = colors.reduce((result, current, index) => {
             return `${result} ${getRgbColor(current.red, current.green, current.blue)} ${current.position}%${index === colors.length-1 ? '' : ','}`
         }, '');
@@ -27,7 +29,7 @@ function AlertLevel ({height = 30, width = 300, colors = [
     return (
         <div style={{
             height, 
-            width, 
+            width,
             display: 'flex', 
             lineHeight: `${height}px`,
         }}>
@@ -53,10 +55,12 @@ function AlertLevel ({height = 30, width = 300, colors = [
  * @param {Array} colors 渐变色的数组, 默认为组件所用数组
  * @param {number} level 级别, 取值为 0-100
  */
-export function getLeveColor(level, colors = gradientColors) {
-    if (!colors || colors.length === 0) return '';
+export function getLevelColor(level, colors = gradientColors) {
+    // 灰色为不合理颜色
+    if ((typeof level !== 'number') || !colors || colors.length === 0) return 'gray';
+
     if (colors.length === 1) return getRgbColor(colors[0].red, colors[0].green, colors[0].blue);
-    let startColor, endColor;
+    let startColor = colors[0], endColor;
     for (let i = 0; i < colors.length; i++) {
         const color = colors[i];
         if(color.position < level) { // 当前颜色结点在目标左侧, 记为起始颜色

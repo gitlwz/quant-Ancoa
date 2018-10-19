@@ -1,6 +1,9 @@
 import React from 'react';
+import { connect } from 'dva';
+import { routerRedux } from 'dva/router';
+
 import { Table } from 'quant-ui';
-import { getLeveColor } from './AlertLevel';
+import { getLevelColor } from './AlertLevel';
 
 const STATUS_UNASSIGNED = 'Unassigned';
 const STATUS_OPEN = 'Open';
@@ -56,7 +59,7 @@ const alertColumns = [
         key: 'severity',
         onCell:(record)=>{
             return {
-                style:{ background: getLeveColor(record.severity) }
+                style:{ background: getLevelColor(record.severity) }
             }
         }
     }, {
@@ -147,13 +150,13 @@ const alertDataSource = [{
 
 
     
-const AlertTable = ({history, dataSource = alertDataSource, columns = alertColumns}) => {
+const AlertTable = ({dispatch, dataSource = alertDataSource, columns = alertColumns}) => {
     
     const displayColumns = columns;
 
     const onRow = (record) => ({
         onClick: () => {
-            history.push(`/alertdetail/${record.id}`)
+            dispatch(routerRedux.push(`/alertdetail/${record.id}`))
         }
     })
     
@@ -173,4 +176,4 @@ const AlertTable = ({history, dataSource = alertDataSource, columns = alertColum
     );
 };
 
-export default AlertTable;
+export default connect()(AlertTable)
