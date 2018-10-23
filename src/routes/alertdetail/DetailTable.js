@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Table } from 'quant-ui';
 import InvolvedMessages from './InvolvedMessages';
 import {getLevelColor} from '../alerts/AlertLevel';
@@ -94,7 +95,7 @@ const getDataSource = (source) => {
     return dataSource;
 }
 
-const DetailTable = ({source = {}}) => {
+const DetailTable = ({ source, loading }) => {
 
     const dataSource = getDataSource(source);
     
@@ -107,9 +108,14 @@ const DetailTable = ({source = {}}) => {
                 pagination={false}
                 showHeader={false}
                 bordered
+                loading={loading}
             />
         </div>
     );
 };
+
+DetailTable.propTypes = {
+    source: PropTypes.object.isRequired,
+}
 
 export default DetailTable;
