@@ -148,7 +148,7 @@ let option = {
         {
             type: 'inside',
             xAxisIndex: [0, 1],
-            start: 10,
+            start: 50,
             end: 100
         },
         {
@@ -156,7 +156,7 @@ let option = {
             xAxisIndex: [0, 1],
             type: 'slider',
             bottom: 10,
-            start: 10,
+            start: 50,
             end: 100,
             
             handleSize: '105%'
