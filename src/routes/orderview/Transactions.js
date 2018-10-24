@@ -1,38 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
 import { Table } from "quant-ui";
-const dataSource = [{
-    key: '1',
-    Time: '0.3:01:49.000',
-    MsgType: "Trade",
-    ActiveUser: 'jolenetan',
-    type:"1",
-  }, {
-    key: '2',
-    Time: '0.3:01:49.000',
-    MsgType: "Order",
-    ActiveUser: 'jolenetan',
-    type:"2",
-  }, {
-    key: '3',
-    Time: '0.3:01:49.000',
-    MsgType: "Order",
-    ActiveUser: 'jolenetan',
-    type:"3",
-  }, {
-    key: '4',
-    Time: '0.3:01:49.000',
-    MsgType: "Order",
-    ActiveUser: 'jolenetan',
-    type:"2",
-  }, {
-    key: '5',
-    Time: '0.3:01:49.000',
-    MsgType: "Order",
-    ActiveUser: 'jolenetan',
-    type:"1",
-  }];
-  
+const dataSource = [];
+
+for(let i = 0 ; i< 100; i++){
+    dataSource.push({
+        key:i,
+        Time: '0.3:01:49.000',
+        MsgType: ["Trade","Order","Order"][i%3],
+        ActiveUser: 'jolenetan',
+        type:i%3,
+    })
+}
+
   const columns = [{
     title: '',
     dataIndex: 'index',
@@ -41,12 +21,12 @@ const dataSource = [{
         return <span>{index + 1}</span>
     }
   },{
-    title: 'Time',
+    title: '时间',
     dataIndex: 'Time',
     key: 'Time',
     
   }, {
-    title: 'MsgType',
+    title: '类型',
     dataIndex: 'MsgType',
     key: 'MsgType',
     onCell:(record)=>{
@@ -55,7 +35,7 @@ const dataSource = [{
         }
     }
   }, {
-    title: 'ActiveUser',
+    title: '实际用户',
     dataIndex: 'ActiveUser',
     key: 'ActiveUser',
   }];
@@ -68,7 +48,13 @@ class Member extends Component {
 
         return (
             <div className="anc-block-height orderview-Transactions">
-                <Table  columns={columns} dataSource={dataSource} size="middle" bordered />
+                <Table  
+                    columns={columns} 
+                    dataSource={dataSource} 
+                    size="small" 
+                    bordered 
+                    pagination={false}
+                />
             </div>
         );
     }

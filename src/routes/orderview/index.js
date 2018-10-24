@@ -40,19 +40,19 @@ class Member extends Component {
                 <Transactions item={item} />
             </DragactCard>
         } else if (item.key == 1) {
-            return <DragactCard item={item} provided={provided} title={"Order Book"}>
+            return <DragactCard item={item} provided={provided} title={"订单薄"}>
                 <OrderBook item={item} />
             </DragactCard>
         }  else if (item.key == 2) {
-            return <DragactCard item={item} provided={provided} title={"Totals"}>
+            return <DragactCard item={item} provided={provided} title={"卖"}>
                 <SellSide item={item} />
             </DragactCard>
         } else if (item.key == 3) {
-            return <DragactCard item={item} provided={provided} title={"Buy Side"}>
+            return <DragactCard item={item} provided={provided} title={"汇总"}>
                 <SellSide item={item} />
             </DragactCard>
         } else if (item.key == 4) {
-            return <DragactCard item={item} provided={provided} title={"Buy Side"}>
+            return <DragactCard item={item} provided={provided} title={"买"}>
                 <SellSide item={item} />
             </DragactCard>
         }

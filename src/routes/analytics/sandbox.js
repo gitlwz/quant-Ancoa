@@ -4,10 +4,10 @@ import echarts from 'echarts';
 import waring from '../../assets/waring.png';
 function randomData() {
     now = +now + nextTime;
-    value = value + Math.random() * 21 - 10;
+    value =  Math.random() * 500+20;
     return {
         name: now.toString(),
-        value: [echarts.format.formatTime('yyyy-MM-dd hh:mm:ss',now),
+        value: [now,
             Math.round(value)
         ]
     }
@@ -41,56 +41,72 @@ let config = {
         // handleIcon: 'M10.7,11.9H9.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4h1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z',
         // handleSize: '105%'
     }],
-    tooltip: {
-        show: true,
-        trigger: "item",
-        enterable:true,
-        formatter: function (params) {
-            if (params.seriesName == "a2") {
-                return `<div style="padding: 20px;">
-                    <h2 style="color: #FFFFFF;">Alert Details</h2>
-                    <table frame="void"  cellpadding="4px" rules="none">
-                        <tr>
-                            <td>ID</td>
-                            <td>
-                                1684
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>ID</td>
-                            <td>
-                            <div class="anc-echats-break">
-                                   的内容很长的内容很长的内容很长的内容
-                            </div>
-                            </td>
-                        </tr>
-                    </table>
-                </div>`
+    tooltip : {
+        trigger: 'axis',
+        axisPointer: {
+            type: 'cross',
+            animation: false,
+            label: {
+                backgroundColor: '#505765'
             }
-            return null
         }
     },
+    // tooltip: {
+    //     show: true,
+    //     trigger: "item",
+    //     enterable:true,
+    //     formatter: function (params) {
+    //         if (params.seriesName == "a2") {
+    //             return `<div style="padding: 20px;">
+    //                 <h2 style="color: #FFFFFF;">Alert Details</h2>
+    //                 <table frame="void"  cellpadding="4px" rules="none">
+    //                     <tr>
+    //                         <td>ID</td>
+    //                         <td>
+    //                             1684
+    //                         </td>
+    //                     </tr>
+    //                     <tr>
+    //                         <td>ID</td>
+    //                         <td>
+    //                         <div class="anc-echats-break">
+    //                                的内容很长的内容很长的内容很长的内容
+    //                         </div>
+    //                         </td>
+    //                     </tr>
+    //                 </table>
+    //             </div>`
+    //         }
+    //         return null
+    //     }
+    // },
     yAxis: {},
     series: [{
         name: "a1",
         symbolSize: 20,
         data: [],
         type: 'scatter',
+    },{
+        name: "a3",
+        data: [],
+        type: 'line',
     }, {
         name: "a2",
         symbolSize: 20,
         data: [],
         type: 'scatter',
-
         symbol: "image://" + waring
     },]
 }
 
-function option(data, data2) {
+function option(data,data1, data2) {
+    console.log("*******",data,data1,data2)
     return {
         series: [{
             data: data,
         }, {
+            data: data1,
+        } ,{
             data: data2,
         }]
     }
@@ -124,10 +140,23 @@ class Member extends Component {
             data.shift();
             data.push(randomData());
             let data2 = data.map((ele) => {
-                let _ele = { value: [ele.value[0], 100] }
+                let _ele = { value: [ele.value[0], 1] }
                 return { ..._ele }
             })
-            this.myChart.setOption(option(data, data2));
+            let data1 = [];
+            data.forEach((ele,index,arr)=>{
+                if(index  == arr.length - 1){
+                    data1.push(ele.value)
+                }else{
+                    data1.push(ele.value)
+                    let arr1 = [
+                        arr[index+1].value[0],
+                        ele.value[1]
+                    ]
+                    data1.push(arr1)
+                }
+            })
+            this.myChart.setOption(option(data,data1, data2));
         }, 2000)
         this.myChart
         window.addEventListener("resize", this.resize);
