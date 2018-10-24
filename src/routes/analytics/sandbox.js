@@ -140,8 +140,7 @@ class Member extends Component {
             data.shift();
             data.push(randomData());
             let data2 = data.map((ele) => {
-                let _ele = { value: [ele.value[0], 1] }
-                return { ..._ele }
+                return [ele.value[0], 1]
             })
             let data1 = [];
             data.forEach((ele,index,arr)=>{
@@ -158,7 +157,6 @@ class Member extends Component {
             })
             this.myChart.setOption(option(data,data1, data2));
         }, 2000)
-        this.myChart
         window.addEventListener("resize", this.resize);
     }
     componentWillUnmount = () => {
