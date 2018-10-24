@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
 import echarts from 'echarts';
-var myData = ['110.82', '110.21', '109.6', '109.1'];
+var myData = ['110.82', '110.21', '109.6', '109.1','110.82', '110.21', '109.6', '109.1','110.82', '110.21', '109.6', '109.1','110.82', '110.21', '109.6', '109.1','110.82', '110.21', '109.6', '109.1','110.82', '110.21', '109.6', '109.1'];
 let option = {
         legend: {
             show:false,
@@ -17,7 +17,11 @@ let option = {
                 type: 'shadow',
             }
         },
-        
+        dataZoom:[{
+            type:"slider",
+                yAxisIndex: [0,1, 2] // 表示这个 dataZoom 组件控制 第一个 和 第三个 yAxis
+
+        }],
         toolbox:{
             right:20,
             feature:{
@@ -205,11 +209,8 @@ let option = {
                         color: '#2E8534',
                     },
                 },
-                data: ["","","530",""],
-            },
-
-
-            {
+                data: ["530","530","530","530","530","530","530","530","530","530","530","530","530","530","530","530","530","530","530","530"],
+            },{
                 name: 'ASK',
                 type: 'bar',
                 barGap: 20,
@@ -249,6 +250,10 @@ let option = {
                 data: [121, 388, 233],
             }
         ],
+        animationEasing: 'elasticOut',
+        animationDurationUpdate: function (idx) {
+            return 500;
+        }
 };
 
 
@@ -279,6 +284,13 @@ class Member extends Component {
             payload: echartsArray
         })
         window.addEventListener("resize", this.resize);
+        setTimeout(()=>{
+            this.myChart.setOption({
+                series:[{
+                    data: ["", "", 550,100],
+                }]
+            })
+        },2000)
     }
     componentWillUnmount = () => {
         window.removeEventListener("resize", this.resize);
