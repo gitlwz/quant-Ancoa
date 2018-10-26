@@ -51,8 +51,8 @@ class GlobalHeaderRight extends PureComponent {
                 type: 'login/logout',
             });
         } else if (key == "delete") {
-            store.remove("layout")
-            message.success($('清除成功'));
+            window.localStorage.removeItem("ancoa-layouts")
+            window.location.reload();            
         }
 
     }
