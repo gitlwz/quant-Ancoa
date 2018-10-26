@@ -6,7 +6,16 @@ export default {
     },
 
     effects: {
-
+        *echartSizeChange({ payload }, { select }){
+            let echartsArray = yield select(({orderview})=>orderview.echartsArray);
+            echartsArray.forEach((ele)=>{
+                try {
+                    ele.echart.resize()
+                } catch (error) {
+                    
+                }
+            })
+        }   
     },
 
     reducers: {
@@ -15,13 +24,6 @@ export default {
                 ...state,
                 ...payload
             };
-        },
-        size(state, { payload }) {
-            let item = state.echartsArray.find((ele) => ele.key == payload);
-            if (!!item) {
-                item.echart.resize()
-            }
-            return state;
         },
     },
 };

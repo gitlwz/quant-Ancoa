@@ -151,7 +151,7 @@ class Member extends Component {
                 </div>
                 <ResponsiveReactGridLayout
                     className="layout"
-                    cols={{ lg: 16, md: 12, sm: 8, xs: 4, xxs: 2 }}
+                    cols={this.props.cols || { lg: 16, md: 12, sm: 8, xs: 4, xxs: 2 }}
                     rowHeight={this.props.rowHeight || 32}
                     onBreakpointChange={this.onBreakpointChange}
                     layouts={this.state.layouts}

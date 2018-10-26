@@ -161,7 +161,7 @@ const AlertTable = ({dispatch, dataSource = alertDataSource, columns = alertColu
     })
     
     return (
-        <div className="anc-block-height">
+        <div>
             <Table 
                 dataSource={dataSource}
                 columns={displayColumns}

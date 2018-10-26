@@ -41,7 +41,7 @@ class Member2 extends Component {
         let { form: { getFieldDecorator } } = this.props;
         return (
             <div>
-                <Form style={{ marginBottom: "14px" }} layout="inline">
+                <Form style={{ marginBottom: "8px" }} layout="inline">
                     <FormItem
                         label="来源"
                     >
@@ -116,10 +116,8 @@ class Member2 extends Component {
                     renderItem={this.renderItem}
                 />
             </div>
-
         )
     }
-
 }
 
 export default connect(({ loading }) => {

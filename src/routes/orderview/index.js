@@ -1,127 +1,96 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
-import DragactCard from "../../components/DragactCard/index.js"
-import { Dragact, Form, Button, Select, DatePicker } from "quant-ui"
+import { Form, Button, Select, DatePicker } from "quant-ui"
 import "./index.less";
 import Transactions from "./Transactions";
 import OrderBook from "./orderbook"
 import SellSide from "./sellSide";
+import GridContent from "../../components/GridContent"
 const FormItem = Form.Item;
 const Option = Select.Option;
 const { RangePicker } = DatePicker;
-const fakeData = [
-    { GridX: 0, GridY: 0, w: 5, h: 18, key: '0' },
-    { GridX: 5, GridY: 0, w: 8, h: 18, key: '1' },
-    { GridX: 13, GridY: 0, w: 3, h: 6, key: '2' },
-    { GridX: 13, GridY: 3, w: 3, h: 6, key: '3' },
-    { GridX: 13, GridY: 6, w: 3, h: 6, key: '4' },
-]
+
 class Member extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            width: window.innerWidth
+            titles: ["Transactions", "订单薄", "卖", "汇总", "买"]
         }
     }
-    componentDidMount = () => {
-        window.addEventListener('resize', this.resizeFooterToolbar);
-    }
-    componentWillUnmount() {
-        window.removeEventListener('resize', this.resizeFooterToolbar);
-    }
-    resizeFooterToolbar = () => {
-        this.setState({
-            width: window.innerWidth
+    onLayoutChange = () => {
+        const  { dispatch } = this.props;
+        dispatch({
+            type:"orderview/echartSizeChange"
         })
     }
-    rednerDragact = (item, provided) => {
-        if (item.key == 0) {
-            return <DragactCard item={item} provided={provided} title={"Transactions"}>
-                <Transactions item={item} />
-            </DragactCard>
-        } else if (item.key == 1) {
-            return <DragactCard item={item} provided={provided} title={"订单薄"}>
-                <OrderBook item={item} />
-            </DragactCard>
-        }  else if (item.key == 2) {
-            return <DragactCard item={item} provided={provided} title={"卖"}>
-                <SellSide item={item} />
-            </DragactCard>
-        } else if (item.key == 3) {
-            return <DragactCard item={item} provided={provided} title={"汇总"}>
-                <SellSide item={item} />
-            </DragactCard>
-        } else if (item.key == 4) {
-            return <DragactCard item={item} provided={provided} title={"买"}>
-                <SellSide item={item} />
-            </DragactCard>
-        }
-    }
-    onDragEnd = (GridItemEvent) => {
-        const { dispatch } = this.props;
-        let { UniqueKey, GridX, GridY, h, w } = GridItemEvent;
-        let index = fakeData.findIndex(ele => ele.key == UniqueKey);
-        if (fakeData[index].w != w || fakeData[index].h != h) {
-            dispatch({
-                type: "orderview/size",
-                payload: UniqueKey
-            })
+    renderItem = (item) => {
+        if (item.i == 0) {
+            return <Transactions item={item} />
+        } else if (item.i == 1) {
+            return <OrderBook item={item} />
+        } else if (item.i == 2) {
+            return <SellSide item={item} />
+        } else if (item.i == 3) {
+            return <SellSide item={item} />
+
+        } else if (item.i == 4) {
+            return <SellSide item={item} />
         }
     }
     render() {
         let { form: { getFieldDecorator } } = this.props;
         return (
             <div>
-                <Form style={{ marginBottom: "14px" }} layout="inline">
+                <Form style={{ marginBottom: "8px" }} layout="inline">
                     <FormItem
-                        label="Source"
+                        label="来源"
                     >
                         {getFieldDecorator('select')(
-                            <Select style={{ width: "140px" }} placeholder="Please select a country">
+                            <Select style={{ width: "140px" }} placeholder="请选择">
                                 <Option value="china">China</Option>
                                 <Option value="use">U.S.A</Option>
                             </Select>
                         )}
                     </FormItem>
                     <FormItem
-                        label="Security"
+                        label="证券"
                     >
                         {getFieldDecorator('Security')(
-                            <Select style={{ width: "140px" }} placeholder="Please select a country">
+                            <Select style={{ width: "140px" }} placeholder="请选择">
                                 <Option value="china">China</Option>
                                 <Option value="use">U.S.A</Option>
                             </Select>
                         )}
                     </FormItem>
                     <FormItem
-                        label="Date"
+                        label="日期"
                     >
                         {getFieldDecorator('Date')(
                             <RangePicker />
                         )}
                     </FormItem>
                     <FormItem
-                        label="Plot"
+                        label="绘图"
                     >
                         {getFieldDecorator('Security')(
-                            <Select style={{ width: "140px" }} placeholder="Please select a country">
+                            <Select style={{ width: "140px" }} placeholder="请选择">
                                 <Option value="china">China</Option>
                                 <Option value="use">U.S.A</Option>
                             </Select>
                         )}
                     </FormItem>
                     <FormItem
-                        label="Style"
+                        label="风格"
                     >
                         {getFieldDecorator('Security')(
-                            <Select style={{ width: "140px" }} placeholder="Please select a country">
+                            <Select style={{ width: "140px" }} placeholder="请选择">
                                 <Option value="china">China</Option>
                                 <Option value="use">U.S.A</Option>
                             </Select>
                         )}
                     </FormItem>
                     <span className="anc-btns">
-                        <Button>New Plot</Button>
+                        <Button>刷新绘图</Button>
                     </span>
                     <span className="anc-btns">
                         <Button>OverLay L</Button>
@@ -130,24 +99,24 @@ class Member extends Component {
                         <Button>OverLay R</Button>
                     </span>
                 </Form>
-                <div className="ancoa-content">
-                    <Dragact
-                        layout={fakeData} //必填项
-                        col={16} //必填项
-                        width={this.state.width - 48} //必填项
-                        rowHeight={40} //必填项
-                        margin={[5, 5]} //必填项
-                        className="plant-layout" //必填项
-                        style={{ background: '#333' }} //非必填项
-                        placeholder={true}
-                        onDragEnd={this.onDragEnd}
-                    >
+                <GridContent
+                    name="orderview"
+                    titles={this.state.titles}
+                    onLayoutChange={this.onLayoutChange}
+                    defaultLayouts={
                         {
-                            this.rednerDragact
-                        }
-                    </Dragact>
+                            lg: [
+                                { x: 0, y: 0, w: 5, h: 18, i: '0' },
+                                { x: 5, y: 0, w: 8, h: 18, i: '1' },
+                                { x: 13, y: 0, w: 3, h: 6, i: '2' },
+                                { x: 13, y: 3, w: 3, h: 6, i: '3' },
+                                { x: 13, y: 6, w: 3, h: 6, i: '4' },
 
-                </div>
+                            ]
+                        }
+                    }
+                    renderItem={this.renderItem}
+                />
             </div>
 
         );

@@ -1,77 +1,52 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
-import { Form, Row, Col, Card,Dragact } from "quant-ui"
+import { Form } from "quant-ui"
 import AlertsHeader from './AlertsHeader';
 import AlertTable from './AlertTable';
-import DragactCard from "../../components/DragactCard/index.js"
-import "./index.css";
-
-
-const fakeData = [
-    { GridX: 0, GridY: 0, w: 18, h: 9, key: '0' },
-    { GridX: 0, GridY: 9, w: 6, h: 9, key: '1' },
-    { GridX: 6, GridY: 9, w: 6, h: 9, key: '2' },
-    { GridX: 12, GridY: 9, w: 6, h: 9, key: '3' },
-]
+import GridContent from "../../components/GridContent"
 class Alerts extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            width: window.innerWidth
+            titles: ["未分配的任务", "已分配", "已解决", "已关闭"]
         }
     }
-    componentDidMount = () => {
-        window.addEventListener('resize', this.resizeFooterToolbar);
-    }
-    componentWillUnmount() {
-        window.removeEventListener('resize', this.resizeFooterToolbar);
-    }
-    resizeFooterToolbar = () => {
-        this.setState({
-            width: window.innerWidth
-        })
-    }
-    rednerDragact = (item, provided) => {
-        if (item.key == 0) {
-            return <DragactCard item={item} provided={provided} title={"交易视图"}>
-                <AlertTable 
-                    item={item} 
-                    history={this.props.history}
-                />
-            </DragactCard>
-        } else if (item.key == 1) {
-            return <DragactCard item={item} provided={provided} title={"Sell Side"}>
-                <AlertTable item={item} />
-            </DragactCard>
-        } else if (item.key == 2) {
-            return <DragactCard item={item} provided={provided} title={"Totals"}>
-                <AlertTable item={item} />
-            </DragactCard>
-        } else if (item.key == 3) {
-            return <DragactCard item={item} provided={provided} title={"Buy Side"}>
-                <AlertTable item={item} />
-            </DragactCard>
+
+    renderItem = (item) => {
+        if (item.i == 0) {
+            return <AlertTable
+                item={item}
+                history={this.props.history}
+            />
+        } else if (item.i == 1) {
+            return <AlertTable item={item} />
+        } else if (item.i == 2) {
+            return <AlertTable item={item} />
+        } else if (item.i == 3) {
+            return <AlertTable item={item} />
         }
     }
     render() {
         return (
             <div>
                 <AlertsHeader />
-                <div style={{marginTop:"14px"}} className="ancoa-content">
-                    <Dragact
-                            layout={fakeData} //必填项
-                            col={18} //必填项
-                            width={this.state.width - 48} //必填项
-                            rowHeight={40} //必填项
-                            margin={[5, 6]} //必填项
-                            className="plant-layout" //必填项
-                            style={{ background: '#333' }} //非必填项
-                            placeholder={true}
-                        >
+                <div style={{ marginTop: "14px" }} className="ancoa-content">
+                    <GridContent
+                        name="alerts"
+                        titles={this.state.titles}
+                        cols ={{ lg: 18, md: 16, sm: 12, xs: 8, xxs: 4 }}
+                        defaultLayouts={
                             {
-                                this.rednerDragact
+                                lg: [
+                                    { x: 0, y: 0, w: 18, h: 9, i: '0' },
+                                    { x: 0, y: 9, w: 6, h: 9, i: '1' },
+                                    { x: 6, y: 9, w: 6, h: 9, i: '2' },
+                                    { x: 12, y: 9, w: 6, h: 9, i: '3' },
+                                ]
                             }
-                        </Dragact>
+                        }
+                        renderItem={this.renderItem}
+                    />
                 </div>
             </div>
         );
