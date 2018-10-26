@@ -4,7 +4,7 @@ import echarts from 'echarts';
 import waring from '../../assets/waring.png';
 function randomData() {
     now = +now + nextTime;
-    value =  Math.random() * 500+20;
+    value = Math.random() * 500 + 20;
     return {
         name: now.toString(),
         value: [now,
@@ -31,17 +31,17 @@ let config = {
         // startValue: new Date(+now - 4 * nextTime),
         // endValue: now,
         filterMode: 'empty'
-    },{
+    }, {
         show: true,
         bottom: 10,
         type: 'slider',
-        start:30,
-        end:100,
+        start: 30,
+        end: 100,
         // bottom: 10,
         // handleIcon: 'M10.7,11.9H9.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4h1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z',
         // handleSize: '105%'
     }],
-    tooltip : {
+    tooltip: {
         trigger: 'axis',
         axisPointer: {
             type: 'cross',
@@ -86,7 +86,7 @@ let config = {
         symbolSize: 20,
         data: [],
         type: 'scatter',
-    },{
+    }, {
         name: "a3",
         data: [],
         type: 'line',
@@ -99,14 +99,13 @@ let config = {
     },]
 }
 
-function option(data,data1, data2) {
-    console.log("*******",data,data1,data2)
+function option(data, data1, data2) {
     return {
         series: [{
             data: data,
         }, {
             data: data1,
-        } ,{
+        }, {
             data: data2,
         }]
     }
@@ -118,24 +117,28 @@ class Member extends Component {
         this.myChart = null;
         this.resize = null;
     }
-    componentDidMount = () => {
-        this.myChart = echarts.init(document.getElementById(`analytics-trade-view`))
-        this.myChart.setOption(config)
-        this.resize = this.myChart.resize;
+    saveEchartsToModels = (myChart) => {
         const { item, dispatch, echartsArray } = this.props;
-        let _echarts = echartsArray.find((ele) => ele.key == item.key);
+        let _echarts = echartsArray.find((ele) => ele.i == item.i);
         if (!!_echarts) {
-            _echarts.echart = this.myChart
+            _echarts.echart = myChart
         } else {
             echartsArray.push({
-                key: item.key,
-                echart: this.myChart
+                i: item.i,
+                echart: myChart
             })
         }
         dispatch({
             type: "analytics/save",
             payload: echartsArray
         })
+    }
+    componentDidMount = () => {
+        this.myChart = echarts.init(document.getElementById(`analytics-trade-view`))
+        this.myChart.setOption(config)
+        this.resize = this.myChart.resize;
+        this.saveEchartsToModels(this.myChart)
+        
         setInterval(() => {
             data.shift();
             data.push(randomData());
@@ -143,19 +146,19 @@ class Member extends Component {
                 return [ele.value[0], 1]
             })
             let data1 = [];
-            data.forEach((ele,index,arr)=>{
-                if(index  == arr.length - 1){
+            data.forEach((ele, index, arr) => {
+                if (index == arr.length - 1) {
                     data1.push(ele.value)
-                }else{
+                } else {
                     data1.push(ele.value)
                     let arr1 = [
-                        arr[index+1].value[0],
+                        arr[index + 1].value[0],
                         ele.value[1]
                     ]
                     data1.push(arr1)
                 }
             })
-            this.myChart.setOption(option(data,data1, data2));
+            this.myChart.setOption(option(data, data1, data2));
         }, 2000)
         window.addEventListener("resize", this.resize);
     }
