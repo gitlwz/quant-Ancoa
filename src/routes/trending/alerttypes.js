@@ -53,24 +53,27 @@ class Member extends Component {
         this.myChart = null;
         this.resize = null;
     }
-    componentDidMount = () => {
-        this.myChart = echarts.init(document.getElementById(`trending-trade-alerttypes`))
-        this.myChart.setOption(option)
-        this.resize = this.myChart.resize;
+    saveEchartsToModels = (myChart) => {
         const { item, dispatch, echartsArray } = this.props;
-        let _echarts = echartsArray.find((ele) => ele.key == item.key);
+        let _echarts = echartsArray.find((ele) => ele.i == item.i);
         if (!!_echarts) {
-            _echarts.echart = this.myChart
+            _echarts.echart = myChart
         } else {
             echartsArray.push({
-                key: item.key,
-                echart: this.myChart
+                i: item.i,
+                echart: myChart
             })
         }
         dispatch({
             type: "trending/save",
             payload: echartsArray
         })
+    }
+    componentDidMount = () => {
+        this.myChart = echarts.init(document.getElementById(`trending-trade-alerttypes`))
+        this.myChart.setOption(option)
+        this.resize = this.myChart.resize;
+        this.saveEchartsToModels(this.myChart)
         window.addEventListener("resize", this.resize);
     }
     componentWillUnmount = () => {
