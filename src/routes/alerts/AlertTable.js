@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'dva';
 import { routerRedux } from 'dva/router';
 
-import { Table } from 'quant-ui';
+import { Table, Ellipsis } from 'quant-ui';
 import { getLevelColor } from './AlertLevel';
 
 const STATUS_UNASSIGNED = 'Unassigned';
@@ -82,7 +82,12 @@ const alertColumns = [
         title: '描述',
         dataIndex: 'desc',
         key: 'desc',
-        width: 300
+        width: 260,
+        render: (text) => (
+            <Ellipsis length={36} tooltip>
+                {'hello' + text}
+            </Ellipsis>
+        )
     },
 ];
 
@@ -150,7 +155,12 @@ const alertDataSource = [{
 
 
     
-const AlertTable = ({dispatch, dataSource = alertDataSource, columns = alertColumns}) => {
+const AlertTable = ({
+    dispatch, 
+    dataSource = alertDataSource, 
+    columns = alertColumns,
+    pagination = false,
+}) => {
     
     const displayColumns = columns;
 
@@ -162,11 +172,11 @@ const AlertTable = ({dispatch, dataSource = alertDataSource, columns = alertColu
     
     return (
         <div>
-            <Table 
+            <Table
                 dataSource={dataSource}
                 columns={displayColumns}
-                pagination={false}
-                scroll={{x: 1680}}
+                pagination={pagination}
+                scroll={{x: 1280}}
                 size="middle" 
                 bordered
                 onRow={onRow}
