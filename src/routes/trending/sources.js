@@ -1,65 +1,88 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
 import echarts from 'echarts';
+function randomData() {
+    let data = []
+    for (let index = 0; index < 10; index++) {
+        let now = new Date(+new Date() + index*24 * 60 * 60 * 1000);
+        let value = Math.random() * 100;
+        data.push({
+            name: now.toString(),
+            value: [
+                [now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/'),
+                Math.round(value)
+            ]
+        })
+
+    }
+    return data
+}
+
 let option = {
-    title: {
-        text: '折线图堆叠'
-    },
     tooltip: {
         trigger: 'axis'
     },
     legend: {
-        data:['邮件营销','联盟广告','视频广告','直接访问','搜索引擎']
+        left: "right",
+        orient: "vertical",
+        top: "20px",
+        align: "left",
+        data: ['交易化', '非正常交易', '非正常价格交易', '异常订单', '非法预先交易', '高波动性', "非正常的价格上涨"]
     },
     grid: {
         left: '3%',
-        right: '4%',
-        bottom: '3%',
+        right: '150px',
+        bottom: '20px',
+        top: "10px",
         containLabel: true
     },
     toolbox: {
         feature: {
-            saveAsImage: {}
+            saveAsImage: {},
         }
     },
     xAxis: {
-        type: 'category',
+        type: 'time',
         boundaryGap: false,
-        data: ['周一','周二','周三','周四','周五','周六','周日']
     },
     yAxis: {
         type: 'value'
     },
     series: [
         {
-            name:'邮件营销',
-            type:'line',
-            stack: '总量',
-            data:[120, 132, 101, 134, 90, 230, 210]
+            name: '交易化',
+            type: 'line',
+            data: randomData()
         },
         {
-            name:'联盟广告',
-            type:'line',
-            stack: '总量',
-            data:[220, 182, 191, 234, 290, 330, 310]
+            name: '非正常交易',
+            type: 'line',
+            data:randomData()
         },
         {
-            name:'视频广告',
-            type:'line',
-            stack: '总量',
-            data:[150, 232, 201, 154, 190, 330, 410]
+            name: '非正常价格交易',
+            type: 'line',
+            data:randomData()
         },
         {
-            name:'直接访问',
-            type:'line',
-            stack: '总量',
-            data:[320, 332, 301, 334, 390, 330, 320]
+            name: '异常订单',
+            type: 'line',
+            data:randomData()
         },
         {
-            name:'搜索引擎',
-            type:'line',
-            stack: '总量',
-            data:[820, 932, 901, 934, 1290, 1330, 1320]
+            name: '非法预先交易',
+            type: 'line',
+            data:randomData()
+        },
+        {
+            name: '高波动性',
+            type: 'line',
+            data:randomData()
+        },
+        {
+            name: '非正常的价格上涨',
+            type: 'line',
+            data:randomData()
         }
     ]
 };
@@ -101,9 +124,9 @@ class Member extends Component {
     render() {
 
         return (
-            <div id="trending-trade-view" style={{ width: "100%", height: `calc(100% - 36px)` }}>
+            <div id="trending-trade-view" style={{ width: "100%", height: `100%` }}>
             </div>
-            );
+        );
     }
 }
 export default connect(({ trending }) => {

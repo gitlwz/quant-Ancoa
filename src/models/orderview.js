@@ -10,7 +10,9 @@ export default {
             let echartsArray = yield select(({orderview})=>orderview.echartsArray);
             echartsArray.forEach((ele)=>{
                 try {
-                    ele.echart.resize()
+                    setTimeout(()=>{
+                        ele.echart.resize()
+                    },200)
                 } catch (error) {
                     
                 }

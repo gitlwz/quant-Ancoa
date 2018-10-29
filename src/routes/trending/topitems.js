@@ -4,14 +4,33 @@ import echarts from 'echarts';
 let option = {
     xAxis: {
         type: 'category',
-        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+        axisTick: {
+            alignWithLabel: true
+        },
+        axisLabel:{
+            rotate:45,
+            interval :0,
+        },
+        data: ['IRS:BKIR', 'IRS:RYA', 'IRS:PAP', 'IRS:CRH', 'IRS:KYG', 'IRS:SKG', 'IRS:ABI', 'IRS:GCC', 'IRS:KSP', 'IRS:ARYN']
+    },
+    tooltip: {
+    },
+    grid: {
+        top: 10,
+        bottom: 20,
+        left: 20,
+        right: 20,
+        containLabel: true
     },
     yAxis: {
-        type: 'value'
+        type: 'value',
+
     },
     series: [{
-        data: [120, 200, 150, 80, 70, 110, 130],
-        type: 'bar'
+        name: '交易量',
+        type: 'bar',
+        barWidth: '60%',
+        data: [300, 280, 200, 190, 180, 170, 150, 100, 80, 30],
     }]
 };
 
@@ -50,9 +69,9 @@ class Member extends Component {
     render() {
 
         return (
-            <div id="trending-trade-topitems" style={{ width: "100%", height: `calc(100% - 36px)` }}>
+            <div id="trending-trade-topitems" style={{ width: "100%", height: `100%` }}>
             </div>
-            );
+        );
     }
 }
 export default connect(({ trending }) => {
