@@ -288,7 +288,6 @@ class Member extends Component {
         window.removeEventListener("resize", this.resize);
     }
     render() {
-
         return (
             <div id="orderview-trade-view" style={{ width: "100%", height: `calc(100% - 36px)` }}>
             </div>

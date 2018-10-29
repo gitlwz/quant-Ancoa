@@ -83,17 +83,20 @@ let config = {
     yAxis: {},
     series: [{
         name: "a1",
+        z: 10,
         symbolSize: 20,
         data: [],
         type: 'scatter',
     }, {
         name: "a3",
         data: [],
+        z: 1,
         type: 'line',
     }, {
         name: "a2",
         symbolSize: 20,
         data: [],
+        z: 1,
         type: 'scatter',
         symbol: "image://" + waring
     },]
@@ -138,7 +141,7 @@ class Member extends Component {
         this.myChart.setOption(config)
         this.resize = this.myChart.resize;
         this.saveEchartsToModels(this.myChart)
-        
+
         setInterval(() => {
             data.shift();
             data.push(randomData());
