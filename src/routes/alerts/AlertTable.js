@@ -24,7 +24,7 @@ const alertColumns = [
         key: 'id',
         sorter: (a, b) => a.id - b.id,
     }, {
-        title: 'Status',
+        title: '状态',
         dataIndex: 'status',
         key: 'status',
         onCell:(record)=>{
@@ -34,27 +34,27 @@ const alertColumns = [
         }
 
     }, {
-        title: 'Priority',
+        title: '优先级',
         dataIndex: 'priority',
         key: 'priority',
     }, {
-        title: 'Classification',
+        title: '分类',
         dataIndex: 'classification',
         key: 'classification',
     }, {
-        title: 'Icon',
+        title: '图标',
         dataIndex: 'icon',
         key: 'icon',
     }, {
-        title: 'AlertType',
+        title: '警告类型',
         dataIndex: 'type',
         key: 'type',
     }, {
-        title: 'Instance Name',
+        title: '实例名',
         dataIndex: 'name',
         key: 'name',
     }, {
-        title: 'Severity',
+        title: '严重程度',
         dataIndex: 'severity',
         key: 'severity',
         onCell:(record)=>{
@@ -63,23 +63,23 @@ const alertColumns = [
             }
         }
     }, {
-        title: 'Trigger Security',
+        title: '触发严重程度',
         dataIndex: 'security',
         key: 'security',
     }, {
-        title: 'Trigger Instrument Type',
+        title: '触发类别',
         dataIndex: 'instrument',
         key: 'instrument',
     }, {
-        title: 'Trigger Currency',
+        title: '货币',
         dataIndex: 'currency',
         key: 'currency',
     }, {
-        title: 'Trigger UniqueIDs',
+        title: '触发特定信息',
         dataIndex: 'ids',
         key: 'ids',
     }, {
-        title: 'Description',
+        title: '描述',
         dataIndex: 'desc',
         key: 'desc',
         width: 300

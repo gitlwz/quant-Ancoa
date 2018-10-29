@@ -31,7 +31,7 @@ function AlertsHeader (props) {
 
                     <FormItem>
                         <Button type="primary">
-                            Search Issues
+                            查询
                         </Button>
                     </FormItem>
                 </Form>
@@ -43,18 +43,18 @@ function AlertsHeader (props) {
                             OFF
                         </Button>
                         <Button type="primary" >
-                            AlertFilters
+                            过滤警告信息
                         </Button>
                     </ButtonGroup>
                 </FormItem>
                 
-                <div className="header-item" style={{margin: '0 10px'}} >
+                <div className="header-item" style={{margin: '0 20px'}} >
                     <AlertLevel />
                 </div>
                 
                 <FormItem className="header-item" >
                     <Button type="primary">
-                        Configuration
+                        配置
                     </Button>
                 </FormItem>
             </Col>

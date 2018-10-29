@@ -2,13 +2,13 @@ import React from 'react';
 import { Divider, Button, Card, Table } from 'quant-ui';
 
 const paramColumns = [{
-    title: 'Parameter Name',
+    title: '参数名',
     dataIndex: 'name',
     key: 'name',
     width: 400,
     onHeaderCell: ()=>({style: {background: '#fafafa'}})
 }, {
-    title: 'Value',
+    title: '值',
     dataIndex: 'value',
     key: 'value',
     onHeaderCell: ()=>({style: {background: '#fafafa'}})
@@ -16,22 +16,22 @@ const paramColumns = [{
 
 const paramSource = [{
     key: '1',
-    name: 'Alert Instance Name',
+    name: '警报实例名',
     value: '',
 }, {
     key: '2',
-    name: 'Percentage Change in the Price from the Previous Day',
+    name: '价格比前一天变化百分比',
     value: 3.65,
 }, {
     key: '3',
-    name: 'Market Source(CSV)',
+    name: '市场源',
     age: '',
 }];
 
 const AlertParameters = () => {
     return (
         <div>
-            <Divider>Alert Parameters</Divider>
+            <Divider>警报参数</Divider>
             <Card>
                 <Table
                     columns={paramColumns}
@@ -41,7 +41,7 @@ const AlertParameters = () => {
                     bordered
                 />
                 <Button type="primary" style={{marginTop: 5}}>
-                    Download
+                    下载
                 </Button>
             </Card>
         </div>

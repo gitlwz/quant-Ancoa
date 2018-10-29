@@ -12,18 +12,18 @@ const AlertDetailHeader = (props) => {
 
                 <Col>
                     <Form layout="inline">
-                        <FormItem> View in: </FormItem>
+                        <FormItem> 视图: </FormItem>
                         <FormItem>
-                            <Button type="primary">TradeView</Button>
+                            <Button type="primary">成交视图</Button>
                         </FormItem>
                         <FormItem>
-                            <Button type="primary">OrderView</Button>
+                            <Button type="primary">订单视图</Button>
                         </FormItem>
                         <FormItem>
-                            <Button type="primary">DataView</Button>
+                            <Button type="primary">数据视图</Button>
                         </FormItem>
                         <FormItem>
-                            <Button type="primary">NetworkView</Button>
+                            <Button type="primary">关联关系视图</Button>
                         </FormItem>
                     </Form>
                 </Col>
@@ -31,7 +31,7 @@ const AlertDetailHeader = (props) => {
                 <Col>
                     <Form layout="inline">
                         <FormItem
-                            label="Assign To:"
+                            label="分派给:"
                         >
                             {getFieldDecorator('assign')(
                                 <Select style={{ width: "140px" }} placeholder="">
@@ -41,11 +41,11 @@ const AlertDetailHeader = (props) => {
                             )}
                         </FormItem>
                         <FormItem
-                            label="Change Status To:"
+                            label="改变状态:"
                         >
                             {getFieldDecorator('changestatus')(
                                 <Select style={{ width: "140px" }} placeholder="" disabled>
-                                    <Option value="unassigned">Unassigned</Option>
+                                    <Option value="unassigned">未分配</Option>
                                     <Option value="open">Open</Option>
                                     <Option value="resolved">Resolved</Option>
                                     <Option value="closed">Closed</Option>
@@ -53,18 +53,18 @@ const AlertDetailHeader = (props) => {
                             )}
                         </FormItem>
                         <FormItem
-                            label="Set Priority To:"
+                            label="设置优先级:"
                         >
                             {getFieldDecorator('setpriority')(
                                 <Select style={{ width: "140px" }} placeholder="">
-                                    <Option value="low">Low</Option>
-                                    <Option value="medium">Medium</Option>
-                                    <Option value="high">High</Option>
+                                    <Option value="low">低</Option>
+                                    <Option value="medium">中</Option>
+                                    <Option value="high">高</Option>
                                 </Select>
                             )}
                         </FormItem>
                         <FormItem
-                            label="Classify As:"
+                            label="分类:"
                         >
                             {getFieldDecorator('classify')(
                                 <Select style={{ width: "140px" }} placeholder="">

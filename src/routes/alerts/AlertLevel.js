@@ -34,7 +34,7 @@ function AlertLevel ({height = 30, width = 300, colors = gradientColors}) {
             lineHeight: `${height}px`,
         }}>
 
-            <span>Low Severity</span>
+            <span>低严重性</span>
 
             <div style={{
                 display: 'inline-block',
@@ -45,7 +45,7 @@ function AlertLevel ({height = 30, width = 300, colors = gradientColors}) {
                 borderRadius: 4,
             }}>{!colors ? '颜色不可用' : ''}</div>
 
-            <span>High Severity</span>
+            <span>高严重性</span>
         </div>
     );
 }

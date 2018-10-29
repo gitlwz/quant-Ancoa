@@ -67,12 +67,12 @@ class FileAttachment extends React.Component {
         
         return (
             <div>
-                <Divider>File Attachment</Divider>
+                <Divider>文件附件</Divider>
                 <Card>
                     <div style={{width: 400}}>
                         <Upload {...props}>
                             <Button>
-                                <Icon type="upload" /> Select File
+                                <Icon type="upload" /> 浏览文件
                             </Button>
                         </Upload>
                     </div>
@@ -84,7 +84,7 @@ class FileAttachment extends React.Component {
                         loading={uploading}
                         style={{marginTop: 10}}
                     >
-                        {uploading ? 'Uploading' : 'Start Upload' }
+                        {uploading ? '正在上传' : '提交文件' }
                     </Button>
                 </Card>
             </div>

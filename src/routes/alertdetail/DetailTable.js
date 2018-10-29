@@ -13,17 +13,17 @@ const CELL_TYPE_VALUE = 1;
  * object 类型相当于值, key 为该值在数据源对象的键, colSpan等为对应单元格的样式属性
  */
 const dataSourceTemplate = [
-    { key: '1', col1: 'Alert ID', col2: 'Alert Type',col3: 'Instance Name', col4: 'Submitted By', col5: 'Trigger Date Time', col6: 'Issuance Date Time' },
+    { key: '1', col1: '警报序号', col2: '警报类型',col3: '实例名', col4: '提交人', col5: '触发日期时间', col6: '发布日期时间' },
     { key: '2', col1: {key: 'id'}, col2: {key: 'type'}, col3: {key: 'instanceName'}, col4: {key: 'submittedBy'}, col5: {key: 'triggerTime'}, col6: {key: 'issuanceTime'} },
-    { key: '3', col1: 'Status', col2: {key: 'status'}, col3: 'Assigned To', col4: {key: 'assigned'}, col5: 'Trigger Source/Segment', col6: {key: 'triggerSource'} },
-    { key: '4', col1: 'Severity', col2: {key: 'severity'}, col3: 'Priority', col4: {key: 'priority'}, col5: 'Classification', col6: {key: 'classification'} },
-    { key: '5', col1: 'Trigger Security', col2: {key: 'triggerSecurity'}, col3: 'Trigger Instrument Type', col4: {key: 'triggerInstrumentType'}, col5: 'Trigger Currency', col6: {key: 'triggerCurrency'} },
-    { key: '6', col1: 'Broker', col2: {key: 'broker'}, col3: 'Client', col4: {key: 'client'}, col5: 'Trader', col6: {key: 'trader'} },
+    { key: '3', col1: '状态', col2: {key: 'status'}, col3: '分派给', col4: {key: 'assigned'}, col5: '触发源/段', col6: {key: 'triggerSource'} },
+    { key: '4', col1: '严重程度', col2: {key: 'severity'}, col3: '优先级', col4: {key: 'priority'}, col5: '分类', col6: {key: 'classification'} },
+    { key: '5', col1: '触发严重程度', col2: {key: 'triggerSecurity'}, col3: '触发类型', col4: {key: 'triggerInstrumentType'}, col5: '货币', col6: {key: 'triggerCurrency'} },
+    { key: '6', col1: 'Broker', col2: {key: 'broker'}, col3: '委托人', col4: {key: 'client'}, col5: '交易者', col6: {key: 'trader'} },
 
-    { key: '7', col1: 'Trigger UniqueIDs', col2: {key: 'uniqueIDs', colSpan: 5},   col3: {colSpan: 0}, col4: {colSpan: 0}, col5: {colSpan: 0}, col6: {colSpan: 0} },
-    { key: '8', col1: 'Title',             col2: {key: 'title', colSpan: 5},       col3: {colSpan: 0}, col4: {colSpan: 0}, col5: {colSpan: 0}, col6: {colSpan: 0} },
-    { key: '9', col1: 'Involved Messages', col2: {key: 'messages', colSpan: 5},    col3: {colSpan: 0}, col4: {colSpan: 0}, col5: {colSpan: 0}, col6: {colSpan: 0} },
-    {key: '10', col1: 'Description',       col2: {key: 'description', colSpan: 5}, col3: {colSpan: 0}, col4: {colSpan: 0}, col5: {colSpan: 0}, col6: {colSpan: 0} },
+    { key: '7', col1: '触发特定信息', col2: {key: 'uniqueIDs', colSpan: 5},   col3: {colSpan: 0}, col4: {colSpan: 0}, col5: {colSpan: 0}, col6: {colSpan: 0} },
+    { key: '8', col1: '标签',             col2: {key: 'title', colSpan: 5},       col3: {colSpan: 0}, col4: {colSpan: 0}, col5: {colSpan: 0}, col6: {colSpan: 0} },
+    { key: '9', col1: '相关信息', col2: {key: 'messages', colSpan: 5},    col3: {colSpan: 0}, col4: {colSpan: 0}, col5: {colSpan: 0}, col6: {colSpan: 0} },
+    {key: '10', col1: '描述',       col2: {key: 'description', colSpan: 5}, col3: {colSpan: 0}, col4: {colSpan: 0}, col5: {colSpan: 0}, col6: {colSpan: 0} },
 ];
 
 const onCell = (colIndex) => (record) => {

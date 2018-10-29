@@ -14,10 +14,10 @@ const RelatedAlert = ({form, onSubmit}) => {
 
     return (
         <div>
-            <Divider>Related Alerts</Divider>
+            <Divider>相关警报</Divider>
             <Card>
                 <Form layout='inline' onSubmit={handleSubmit}>
-                    <FormItem label="Enter Alert ID: ">
+                    <FormItem label="输入警报ID: ">
                         {getFieldDecorator('alertId')(
                             <Input type="text" />
                         )}
@@ -28,7 +28,7 @@ const RelatedAlert = ({form, onSubmit}) => {
                             htmlType="submit"
                             disabled={!(alertId && alertId.trim())}
                         >
-                            Submit
+                            提交
                         </Button>
                     </FormItem>
                 </Form>
