@@ -4,6 +4,7 @@ import { Form, Button, Select, DatePicker } from "quant-ui"
 import "./index.less";
 import Transactions from "./Transactions";
 import OrderBook from "./orderbook"
+import Orderbooktable from "./orderbooktable"
 import SellSide from "./sellSide";
 import GridContent from "../../components/GridContent"
 const FormItem = Form.Item;
