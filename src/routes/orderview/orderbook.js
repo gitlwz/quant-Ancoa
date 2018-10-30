@@ -19,7 +19,7 @@ let option = {
         },
         dataZoom:[{
             type:"slider",
-                yAxisIndex: [0,1, 2] // 表示这个 dataZoom 组件控制 第一个 和 第三个 yAxis
+            yAxisIndex: [0,1, 2] // 表示这个 dataZoom 组件控制 第一个 和 第三个 yAxis
 
         }],
         toolbox:{
@@ -106,7 +106,7 @@ let option = {
                     type: 'solid',
                 },
             },
-        }, ],
+        } ],
         yAxis: [{
             type: 'category',
             inverse: true,

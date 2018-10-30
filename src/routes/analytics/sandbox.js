@@ -59,13 +59,14 @@ let config = {
     },
     toolbox: {
         feature: {
+            dataZoom:{},
             saveAsImage: {},
             restore: {}
         }
     },
     dataZoom: [{
         type: "inside",
-        filterMode: 'empty'
+        filterMode: 'none'
     }, {
         show: true,
         bottom: 10,
@@ -75,10 +76,17 @@ let config = {
         // bottom: 10,
         // handleIcon: 'M10.7,11.9H9.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4h1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z',
         // handleSize: '105%'
+    },{
+        show: true,
+        type: 'slider',
+        orient:"vertical"
+        // bottom: 10,
+        // handleIcon: 'M10.7,11.9H9.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4h1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z',
+        // handleSize: '105%'
     }],
     tooltip: {
         trigger: 'item',
-        formatter: function (params) {
+        formatter:  (params) => {
             if (params.seriesName == "waring") {
                 return `<div style="padding: 20px;">
                     <h2 style="color: #FFFFFF;">Alert Details</h2>
@@ -92,9 +100,7 @@ let config = {
                         <tr>
                             <td>ID</td>
                             <td>
-                            <div class="anc-echats-break">
-                                   的内容很长的内容很长的内容很长的内容
-                            </div>
+                                的内容很长的内容很长的内容很长的内容
                             </td>
                         </tr>
                     </table>
@@ -296,7 +302,7 @@ function option() {
         { value: ["2018/10/29 10:22:01.540", 0] },
         { value: ["2018/10/29 10:25:59.271", 0] },
     ]
-    let data5 = getLineData(data);
+    let data5 = getLineData(data3);
     return {
         series: [{
             data: data,
