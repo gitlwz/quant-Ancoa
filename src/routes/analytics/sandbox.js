@@ -2,6 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'dva';
 import echarts from 'echarts';
 import waring from '../../assets/waring.png';
+import waring1 from '../../assets/waring1.png';
+import waring2 from '../../assets/waring2.png';
+import waring10 from '../../assets/waring10.png';
+import moment from "moment";
+
+
 function randomData() {
     now = +now + nextTime;
     value = Math.random() * 500 + 20;
@@ -13,6 +19,21 @@ function randomData() {
     }
 }
 
+function getLineData(data) {
+    let lineData = []
+    data.forEach((ele, index, arr) => {
+        lineData.push({
+            value: [ele.value[0], ele.value[1]]
+        })
+        if (index !== arr.length - 1) {
+            lineData.push({
+                value: [arr[index].value[0], arr[index + 1].value[1]]
+            })
+        }
+    })
+    return lineData
+}
+
 var data = [];
 var now = +new Date();
 var nextTime = 15 * 60 * 1000;
@@ -22,14 +43,28 @@ for (var i = 0; i < 10; i++) {
 }
 
 let config = {
+    legend: {
+        data: ["买", "卖", "成交"]
+    },
+    yAxis: { name: "价格", },
     xAxis: {
         type: "time",
-        // min:echarts.format.formatTime('yyyy-MM-dd hh:mm:ss',new Date())
+        name: "时间",
+
+        axisLabel: {
+            formatter: function (value, index) {
+                return moment(value).format("YY-MM-DD HH:mm:ss");
+            }
+        }
+    },
+    toolbox: {
+        feature: {
+            saveAsImage: {},
+            restore: {}
+        }
     },
     dataZoom: [{
         type: "inside",
-        // startValue: new Date(+now - 4 * nextTime),
-        // endValue: now,
         filterMode: 'empty'
     }, {
         show: true,
@@ -42,74 +77,237 @@ let config = {
         // handleSize: '105%'
     }],
     tooltip: {
-        trigger: 'axis',
-        axisPointer: {
-            type: 'cross',
-            animation: false,
-            label: {
-                backgroundColor: '#505765'
+        trigger: 'item',
+        formatter: function (params) {
+            if (params.seriesName == "waring") {
+                return `<div style="padding: 20px;">
+                    <h2 style="color: #FFFFFF;">Alert Details</h2>
+                    <table frame="void"  cellpadding="4px" rules="none">
+                        <tr>
+                            <td>ID</td>
+                            <td>
+                                1684
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>ID</td>
+                            <td>
+                            <div class="anc-echats-break">
+                                   的内容很长的内容很长的内容很长的内容
+                            </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>`
             }
-        }
+
+            let str = ""
+            str += `
+                <div style="border-bottom: 1px solid rgba(255,255,255,.3); font-size: 18px;padding-bottom: 7px;margin-bottom: 7px">
+                ${params.marker}${params.seriesName}
+                </div>
+                时间： ${params.value[0]}
+                <br/>
+                价格：${params.value[1]}
+                <br/>
+                手数：${params.value[2]}
+                <br/>
+                很多信息：1
+                <br/>
+                很多信息：2
+                `
+            return str;
+        },
     },
-    // tooltip: {
-    //     show: true,
-    //     trigger: "item",
-    //     enterable:true,
-    //     formatter: function (params) {
-    //         if (params.seriesName == "a2") {
-    //             return `<div style="padding: 20px;">
-    //                 <h2 style="color: #FFFFFF;">Alert Details</h2>
-    //                 <table frame="void"  cellpadding="4px" rules="none">
-    //                     <tr>
-    //                         <td>ID</td>
-    //                         <td>
-    //                             1684
-    //                         </td>
-    //                     </tr>
-    //                     <tr>
-    //                         <td>ID</td>
-    //                         <td>
-    //                         <div class="anc-echats-break">
-    //                                的内容很长的内容很长的内容很长的内容
-    //                         </div>
-    //                         </td>
-    //                     </tr>
-    //                 </table>
-    //             </div>`
-    //         }
-    //         return null
-    //     }
-    // },
-    yAxis: {},
     series: [{
-        name: "a1",
+        name: "买",
         z: 10,
         symbolSize: 20,
         data: [],
         type: 'scatter',
+        itemStyle: {
+            color: "#00B0F0",
+            borderColor: "#0066CC",
+            borderWidth: 1,
+        },
+        emphasis: {
+            show: true,
+            itemStyle: {
+                shadowBlur: 5,
+                shadowColor: '#0066CC',
+                shadowOffsetY: 2,
+            }
+        }
+        // ,symbolSize:function(data){
+        //     return data[2]/5
+        // }
     }, {
-        name: "a3",
-        data: [],
-        z: 1,
-        type: 'line',
-    }, {
-        name: "a2",
+        name: "卖",
+        z: 10,
         symbolSize: 20,
         data: [],
+        type: 'scatter',
+        itemStyle: {
+            color: "#FF0000",
+            borderColor: "#FF3300",
+            borderWidth: 1,
+        },
+        emphasis: {
+            show: true,
+            itemStyle: {
+                shadowBlur: 5,
+                shadowColor: '#FF3300',
+                shadowOffsetY: 2,
+            }
+
+        }
+        // ,symbolSize:function(data){
+        //     return data[2]/5
+        // }
+    }, {
+        name: "成交",
+        z: 10,
+        symbolSize: 20,
+        data: [],
+        type: 'scatter',
+        itemStyle: {
+            color: "#92D050",
+            borderColor: "#92D050",
+            borderWidth: 1,
+        },
+        emphasis: {
+            show: true,
+            itemStyle: {
+                shadowBlur: 5,
+                shadowColor: '#92D050',
+                shadowOffsetY: 2,
+            }
+        }
+        // ,symbolSize:function(data){
+        //     return data[2]/5
+        // }
+    }, {
+        name: "waring",
+        symbolSize: 20,
+        data: [],
+        symbolKeepAspect: true,
         z: 1,
         type: 'scatter',
         symbol: "image://" + waring
-    },]
+    }, {
+        name: "line",
+        data: [],
+        z: 1,
+        hoverAnimation: false,
+        legendHoverLink: false,
+        type: 'line',
+        symbol: "none"
+    }]
 }
 
-function option(data, data1, data2) {
+function option() {
+    let data = [{
+        value: ['2018/10/29 10:00:01.237', 100, Math.random() * 250],
+
+    }, {
+        value: ['2018/10/29 10:00:01.239', 102, Math.random() * 250]
+    }, {
+        value: ["2018/10/29 10:00:04.471", 105, Math.random() * 250]
+    }, {
+        value: ["2018/10/29 10:00:10.437", 106, Math.random() * 250]
+    }, {
+        value: ["2018/10/29 10:00:10.649", 107, Math.random() * 250]
+    }, {
+        value: ["2018/10/29 10:00:10.653", 102, Math.random() * 250]
+    }, {
+        value: ["2018/10/29 10:00:11.249", 105, Math.random() * 250]
+    }, {
+        value: ["2018/10/29 10:04:01.251", 103, Math.random() * 250]
+    }, {
+        value: ["2018/10/29 10:10:03.456", 100, Math.random() * 250]
+    }, {
+        value: ["2018/10/29 10:15:45.255", 103, Math.random() * 250]
+    }, {
+        value: ["2018/10/29 10:15:47.256", 102, Math.random() * 250]
+    }, {
+        value: ["2018/10/29 10:20:59.299", 102, Math.random() * 250]
+    }, {
+        value: ["2018/10/29 10:25:59.261", 100, Math.random() * 250]
+    }
+    ]
+    let data2 = [
+        { value: ["2018/10/29 10:00:01.238", 100, Math.random() * 250] },
+        { value: ["2018/10/29 10:00:03.340", 101, Math.random() * 250] },
+        { value: ["2018/10/29 10:00:06.242", 102, Math.random() * 250] },
+        { value: ["2018/10/29 10:00:10.647", 103, Math.random() * 250] },
+        { value: ["2018/10/29 10:00:10.651", 105, Math.random() * 250] },
+        { value: ["2018/10/29 10:00:10.654", 103, Math.random() * 250] },
+        { value: ["2018/10/29 10:01:00.420", 104, Math.random() * 250] },
+        { value: ["2018/10/29 10:06:06.763", 103, Math.random() * 250] },
+        { value: ["2018/10/29 10:10:03.460", 102, Math.random() * 250] },
+        { value: ["2018/10/29 10:15:46.255", 101, Math.random() * 250] },
+        { value: ["2018/10/29 10:20:54.457", 102, Math.random() * 250] },
+        { value: ["2018/10/29 10:22:01.540", 101, Math.random() * 250] },
+        { value: ["2018/10/29 10:25:59.271", 101, Math.random() * 250] },
+    ]
+    let data3 = [
+        {
+            value: ["2018/10/29 10:00:01.238", 100, Math.random() * 250],
+            symbolOffset: ['50%', 0]
+        },
+        { value: ["2018/10/29 10:00:03.340", 101, Math.random() * 250] },
+        { value: ["2018/10/29 10:00:06.242", 102, Math.random() * 250] },
+        { value: ["2018/10/29 10:00:10.647", 103, Math.random() * 250] },
+        { value: ["2018/10/29 10:00:10.651", 105, Math.random() * 250] },
+        { value: ["2018/10/29 10:00:10.654", 103, Math.random() * 250] },
+        { value: ["2018/10/29 10:01:00.420", 104, Math.random() * 250] },
+        { value: ["2018/10/29 10:06:06.763", 103, Math.random() * 250] },
+        { value: ["2018/10/29 10:10:03.460", 102, Math.random() * 250] },
+        { value: ["2018/10/29 10:15:46.255", 101, Math.random() * 250] },
+        { value: ["2018/10/29 10:20:54.457", 102, Math.random() * 250] },
+        { value: ["2018/10/29 10:22:01.540", 101, Math.random() * 250] },
+        { value: ["2018/10/29 10:25:59.271", 101, Math.random() * 250] },
+    ]
+
+    let data4 = [
+        { value: ["2018/10/29 10:00:01.238", 0] },
+        { value: ["2018/10/29 10:00:03.340", 0] },
+        { value: ["2018/10/29 10:00:06.242", 0] },
+        { value: ["2018/10/29 10:00:10.647", 0] },
+        { value: ["2018/10/29 10:00:10.651", 0] },
+        { value: ["2018/10/29 10:00:10.654", 0] },
+        { value: ["2018/10/29 10:01:00.420", 0] },
+        { value: ["2018/10/29 10:06:06.763", 0] },
+        {
+            value: ["2018/10/29 10:10:03.460", 0],
+            symbol: "image://" + waring1,
+            symbolSize: 40,
+        },
+        {
+            value: ["2018/10/29 10:15:46.255", 0],
+            symbol: "image://" + waring2,
+            symbolSize: 40,
+        },
+        {
+            value: ["2018/10/29 10:20:54.457", 0],
+            symbol: "image://" + waring10,
+            symbolSize: 40,
+        },
+        { value: ["2018/10/29 10:22:01.540", 0] },
+        { value: ["2018/10/29 10:25:59.271", 0] },
+    ]
+    let data5 = getLineData(data);
     return {
         series: [{
             data: data,
         }, {
-            data: data1,
-        }, {
             data: data2,
+        }, {
+            data: data3,
+        }, {
+            data: data4,
+        }, {
+            data: data5,
         }]
     }
 };
@@ -142,27 +340,36 @@ class Member extends Component {
         this.resize = this.myChart.resize;
         this.saveEchartsToModels(this.myChart)
 
-        setInterval(() => {
-            data.shift();
-            data.push(randomData());
-            let data2 = data.map((ele) => {
-                return [ele.value[0], 1]
-            })
-            let data1 = [];
-            data.forEach((ele, index, arr) => {
-                if (index == arr.length - 1) {
-                    data1.push(ele.value)
-                } else {
-                    data1.push(ele.value)
-                    let arr1 = [
-                        arr[index + 1].value[0],
-                        ele.value[1]
-                    ]
-                    data1.push(arr1)
-                }
-            })
-            this.myChart.setOption(option(data, data1, data2));
-        }, 2000)
+        data.shift();
+        data.push(randomData());
+        let data2 = data.map((ele) => {
+            return [ele.value[0], 1]
+        })
+        let data1 = [];
+        data.forEach((ele, index, arr) => {
+            if (index == arr.length - 1) {
+                data1.push(ele.value)
+            } else {
+                data1.push(ele.value)
+                let arr1 = [
+                    arr[index + 1].value[0],
+                    ele.value[1]
+                ]
+                data1.push(arr1)
+            }
+        })
+        this.myChart.setOption(option(data, data1, data2));
+        this.myChart.on('legendselectchanged', (params) => {
+            if (params.name == "成交") {
+                let falg = params["selected"]["成交"]
+
+                this.myChart.dispatchAction({
+                    type: 'legendToggleSelect',
+                    // 图例名称
+                    name: "line"
+                })
+            }
+        });
         window.addEventListener("resize", this.resize);
     }
     componentWillUnmount = () => {
@@ -171,11 +378,8 @@ class Member extends Component {
     render() {
 
         return (
-            <div id="analytics-trade-view" style={{ width: "100%", height: `100%` }}>
-
-
+            <div id="analytics-trade-view" style={{ width: "100%", height: `calc(100% - 36px)` }}>
             </div>
-
         );
     }
 }
@@ -184,7 +388,6 @@ export default connect(({ analytics }) => {
     return {
         echartsArray
     }
-
 })(
     Member
 )
