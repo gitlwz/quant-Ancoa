@@ -61,7 +61,6 @@ class Member extends Component {
     onLayoutChange = (layout, layouts) => {
         saveToLS(this.props.name, layouts);
         this.setState({ layouts });
-        console.log("************",layout, layouts)
         this.props.onLayoutChange(layout, layouts)
     }
     //删除
@@ -167,5 +166,4 @@ class Member extends Component {
         );
     }
 }
-
 export default Member
