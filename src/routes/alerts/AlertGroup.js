@@ -1,7 +1,7 @@
 import React from 'react';
 import { TagSelect } from "quant-ui"
 
-const AlertGroup = ({onSelect = (value) => console.log('select: ' + value)}) => {
+const AlertGroup = ({onSelect, defaultValue = [], dataSource = []}) => {
 
   const tagSelectStyle = {
     position: 'absolute', 
@@ -15,13 +15,13 @@ const AlertGroup = ({onSelect = (value) => console.log('select: ' + value)}) => 
   return (
     <div style={{position: 'relative'}}>
       <TagSelect 
-        defaultValue={['assignedToMe', 'unassigned']}
+        defaultValue={defaultValue}
         onChange={onSelect} 
         style={tagSelectStyle}>
-        <TagSelect.Option value="unassigned">未分配(5)</TagSelect.Option>
-        <TagSelect.Option value="assignedToMe">已分配(3)</TagSelect.Option>
-        <TagSelect.Option value="solved">已解决(1)</TagSelect.Option>
-        <TagSelect.Option value="closed">已关闭(4)</TagSelect.Option>
+        <TagSelect.Option value="Unassigned">未分配({dataSource.filter(d => d.status === "Unassigned").length})</TagSelect.Option>
+        <TagSelect.Option value="Open">已分配({dataSource.filter(d => d.status === "Open").length})</TagSelect.Option>
+        <TagSelect.Option value="Resolved">已解决({dataSource.filter(d => d.status === "Resolved").length})</TagSelect.Option>
+        <TagSelect.Option value="Closed">已关闭({dataSource.filter(d => d.status === "Closed").length})</TagSelect.Option>
       </TagSelect>
     </div>
   );

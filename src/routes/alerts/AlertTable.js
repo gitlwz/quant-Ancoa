@@ -5,6 +5,8 @@ import { routerRedux } from 'dva/router';
 import { Table, Ellipsis } from 'quant-ui';
 import { getLevelColor } from './AlertLevel';
 
+import mockDataSource from './mockdata'; 
+
 const STATUS_UNASSIGNED = 'Unassigned';
 const STATUS_OPEN = 'Open';
 const STATUS_RESOLVED = 'Resolved';
@@ -90,79 +92,19 @@ const alertColumns = [
         )
     },
 ];
-
-const alertDataSource = [{
-    key: '1',
-    id: '57',
-    status: STATUS_UNASSIGNED,
-    priority: 'Medium',
-    classification: 'Unclassified',
-    icon: 'user',
-    type: 'Wash Trading Alert',
-    name: ' ',
-    severity: 78,
-    security: 'PF1808',
-    instrument: 'Futures',
-    currency: 'USD',
-    ids: '24|90|80',
-    desc: 'Security "PF 1808 potential wash the closing price. 1,096.50.',
-}, {
-    key: '2',
-    id: '58',
-    status: STATUS_OPEN,
-    priority: 'Medium',
-    classification: 'Unclassified',
-    icon: 'user',
-    type: 'Wash Trading Alert',
-    name: ' ',
-    severity: 83,
-    security: 'PF1808',
-    instrument: 'Futures',
-    currency: 'USD',
-    ids: '24|90|80',
-    desc: 'Security "PF 1808 potential wash the closing price. 1,096.50.',
-},{
-    key: '3',
-    id: '67',
-    status: STATUS_RESOLVED,
-    priority: 'Medium',
-    classification: 'Unclassified',
-    icon: 'user',
-    type: 'Wash Trading Alert',
-    name: ' ',
-    severity: 55,
-    security: 'PF1808',
-    instrument: 'Futures',
-    currency: 'USD',
-    ids: '24|90|80',
-    desc: 'Security "PF 1808 potential wash the closing price. 1,096.50.',
-},{
-    key: '4',
-    id: '87',
-    status: STATUS_CLOSED,
-    priority: 'Medium',
-    classification: 'Unclassified',
-    icon: 'user',
-    type: 'Wash Trading Alert',
-    name: ' ',
-    severity: 24,
-    security: 'PF1808',
-    instrument: 'Futures',
-    currency: 'USD',
-    ids: '24|90|80',
-    desc: 'Security "PF 1808 potential wash the closing price. 1,096.50.',
-},];
-
-
     
 const AlertTable = ({
     dispatch, 
-    dataSource = alertDataSource, 
+    dataSource = mockDataSource, 
     columns = alertColumns,
     pagination = false,
+    visibleStatus,
 }) => {
     
     const displayColumns = columns;
+    const displayDataSource = dataSource.filter(d => {
+        return visibleStatus.findIndex(s => s === d.status) !== -1
+    })
 
     const onRow = (record) => ({
         onClick: () => {
@@ -173,7 +115,7 @@ const AlertTable = ({
     return (
         <div>
             <Table
-                dataSource={dataSource}
+                dataSource={displayDataSource}
                 columns={displayColumns}
                 pagination={pagination}
                 scroll={{x: 1280}}
