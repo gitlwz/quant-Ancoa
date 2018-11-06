@@ -66,7 +66,7 @@ export function getLevelColor(level, colors = gradientColors) {
         if(color.position < level) { // 当前颜色结点在目标左侧, 记为起始颜色
             startColor = color;
         } else if (color.position === level) { // 当前颜色结点恰好是目标位置, 可以直接记为结果
-            return getRgbColor(color.red, color.blue, color.green);
+            return getRgbColor(color.red, color.green, color.blue);
         } else { // 当前颜色结点在目标右侧, 记为结束颜色并返回
             endColor = color;
             break;
