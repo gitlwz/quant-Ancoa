@@ -46,8 +46,13 @@ let config = {
     legend: {
         data: ["买", "卖", "成交"]
     },
-    yAxis: { name: "价格", },
-    xAxis: {
+    grid: [{
+        
+    },{
+
+    }],
+    yAxis: [{ name: "价格"},{ name: "价格222",gridIndex:1,show:false}],
+    xAxis: [{
         type: "time",
         name: "时间",
 
@@ -56,10 +61,18 @@ let config = {
                 return moment(value).format("YY-MM-DD HH:mm:ss");
             }
         }
-    },
+    },{
+        type: "time",
+        show:false,
+        gridIndex:1,
+        
+    }],
     toolbox: {
         feature: {
-            dataZoom:{},
+            dataZoom:{
+                xAxisIndex:[0,1],
+                yAxisIndex:0,
+            },
             saveAsImage: {},
             restore: {}
         }
@@ -73,6 +86,7 @@ let config = {
         type: 'slider',
         start: 30,
         end: 100,
+        xAxisIndex:[0,1]
         // bottom: 10,
         // handleIcon: 'M10.7,11.9H9.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4h1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z',
         // handleSize: '105%'
@@ -136,6 +150,8 @@ let config = {
             borderColor: "#0066CC",
             borderWidth: 1,
         },
+        xAxisIndex:0,
+        yAxisIndex:0,
         emphasis: {
             show: true,
             itemStyle: {
@@ -158,6 +174,8 @@ let config = {
             borderColor: "#FF3300",
             borderWidth: 1,
         },
+        xAxisIndex:0,
+        yAxisIndex:0,
         emphasis: {
             show: true,
             itemStyle: {
@@ -181,6 +199,8 @@ let config = {
             borderColor: "#92D050",
             borderWidth: 1,
         },
+        xAxisIndex:0,
+        yAxisIndex:0,
         emphasis: {
             show: true,
             itemStyle: {
@@ -198,12 +218,16 @@ let config = {
         data: [],
         symbolKeepAspect: true,
         z: 1,
+        xAxisIndex:1,
+        yAxisIndex:1,
         type: 'scatter',
         symbol: "image://" + waring
     }, {
         name: "line",
         data: [],
         z: 1,
+        xAxisIndex:0,
+        yAxisIndex:0,
         hoverAnimation: false,
         legendHoverLink: false,
         type: 'line',
