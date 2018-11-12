@@ -12,7 +12,7 @@ export default {
         *fetch({ payload }, {call, put}) {
             console.log('payload: ', payload);
             const { id } = payload;
-            yield call(delay, 2000);
+            yield call(delay, 1000);
             yield put({ type: 'save', payload: {
                 detailTableSource: {
                     id,

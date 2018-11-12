@@ -24,18 +24,24 @@ class AlertDetail extends Component {
             routerRedux.push(`/alertdetail/${alertId}`)
         );
     }
+    changeView = (viewName) => {
+        this.props.dispatch(
+            routerRedux.push(`/${viewName}`)
+        );
+    }
     
     render() {
 
-        const { loading, detailTableSource, dispatch } = this.props;
+        const { loading, detailTableSource } = this.props;
         
         return (
             <div>
-                <AlertDetailHeader />
+                <AlertDetailHeader changeView={this.changeView} />
 
                 <DetailTable
                     source={detailTableSource}
                     loading={loading}
+                    changeView={this.changeView}
                 />
 
                 <Comments />

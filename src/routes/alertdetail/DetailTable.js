@@ -39,7 +39,7 @@ const onCell = (colIndex) => (record) => {
     }
 }
 
-const render = (cell) => {
+const render = (changeView) => (cell) => {
     // 项名称直接返回
     if (cell.type === CELL_TYPE_TITLE) {
         return cell.value;
@@ -49,7 +49,7 @@ const render = (cell) => {
     // 特殊项
     if (key ==='messages') {
         return {
-            children: <InvolvedMessages message={value} />,
+            children: <InvolvedMessages message={value} changeView={changeView} />,
             props,
         }
     }
@@ -62,14 +62,15 @@ const render = (cell) => {
 
 // 固定列
 const columns = [
-    { dataIndex: 'col1', key: 'col1', onCell: onCell('col1'), render }, 
-    { dataIndex: 'col2', key: 'col2', onCell: onCell('col2'), render },
-    { dataIndex: 'col3', key: 'col3', onCell: onCell('col3'), render },
-    { dataIndex: 'col4', key: 'col4', onCell: onCell('col4'), render },
-    { dataIndex: 'col5', key: 'col5', onCell: onCell('col5'), render },
-    { dataIndex: 'col6', key: 'col6', onCell: onCell('col6'), render },
+    { dataIndex: 'col1', key: 'col1', onCell: onCell('col1') }, 
+    { dataIndex: 'col2', key: 'col2', onCell: onCell('col2') },
+    { dataIndex: 'col3', key: 'col3', onCell: onCell('col3') },
+    { dataIndex: 'col4', key: 'col4', onCell: onCell('col4') },
+    { dataIndex: 'col5', key: 'col5', onCell: onCell('col5') },
+    { dataIndex: 'col6', key: 'col6', onCell: onCell('col6') },
 ];
 
+// 将 sourceTemplate 中的相关单元格替换为对应数据
 const getDataSource = (source) => {
     
     const dataSource = dataSourceTemplate.map((item) => {
@@ -95,15 +96,16 @@ const getDataSource = (source) => {
     return dataSource;
 }
 
-const DetailTable = ({ source, loading }) => {
+const DetailTable = ({ source, changeView, loading }) => {
 
     const dataSource = getDataSource(source);
+    const displayColumns = columns.map(c => ({...c, render: render(changeView)}))
     
     return (
         <div style={{background: 'white'}}>
             <Table 
                 dataSource={dataSource}
-                columns={columns}
+                columns={displayColumns}
                 size="small"
                 pagination={false}
                 showHeader={false}
