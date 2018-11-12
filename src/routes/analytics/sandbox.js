@@ -27,7 +27,7 @@ function getLineData(data) {
         })
         if (index !== arr.length - 1) {
             lineData.push({
-                value: [arr[index].value[0], arr[index + 1].value[1]]
+                value: [arr[index + 1].value[0],arr[index].value[1]]
             })
         }
     })

@@ -185,20 +185,8 @@ let option = {
             type: 'line',
             itemStyle: {
                 color: upColor,
-               
             },
             smooth: true,
-            areaStyle: {
-                normal: {
-                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                        offset: 0.8,
-                        color: upColor
-                    }, {
-                        offset: 1,
-                        color: '#ffe'
-                    }])
-                }
-            },
             encode: {
                 x: 0,
                 y: [1]
@@ -210,17 +198,6 @@ let option = {
                 color: downColor,
             },
             smooth: true,
-            areaStyle: {
-                normal: {
-                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                        offset: 0.8,
-                        color: downColor
-                    }, {
-                        offset: 1,
-                        color: '#ffe'
-                    }])
-                }
-            },
             encode: {
                 x: 0,
                 y: [2]

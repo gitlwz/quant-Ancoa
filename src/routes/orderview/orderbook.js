@@ -358,6 +358,20 @@ class Member extends Component {
         this.resize = this.myChart.resize;
         this.saveEchartsToModels(this.myChart)
         window.addEventListener("resize", this.resize);
+
+        setTimeout(()=>{
+            this.myChart.setOption({
+                series:[
+                    {
+                        data:["", "", "", "", "", "", "", "", "", "", "55", "300", "150", "", "", "", "", "", "30", "", ""],
+                    },{
+
+                    },{
+                        data:["", "", "", "", "", "", "", "", "", "", "", "", "300", "", "", "240", "", "", "", "", ""],
+                    }
+                ]
+            })
+        },2000)
     }
     componentWillUnmount = () => {
         window.removeEventListener("resize", this.resize);
