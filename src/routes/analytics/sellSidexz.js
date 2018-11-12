@@ -20,10 +20,25 @@ const dataSource = [{
     key: "总报价量",
     value: "8"
 }, {
+    key: "总请求量",
+    value: "8"
+}, {
     key: "总请求值",
     value: "8"
 }, {
-    key: "价格区间",
+    key: "交易数量",
+    value: "8"
+}, {
+    key: "交易总量",
+    value: "8"
+}, {
+    key: "交易总值",
+    value: "8"
+}, {
+    key: "电话",
+    value: "8"
+}, {
+    key: "邮件",
     value: "8"
 }]
 const columns = [{

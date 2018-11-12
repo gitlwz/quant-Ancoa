@@ -20,6 +20,9 @@ const dataSource = [{
     key: "总报价量",
     value: "8"
 }, {
+    key: "总请求量",
+    value: "8"
+}, {
     key: "总请求值",
     value: "8"
 }, {

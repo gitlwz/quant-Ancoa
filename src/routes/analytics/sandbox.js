@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
 import echarts from 'echarts';
-import waring from '../../assets/waring.png';
-import waring1 from '../../assets/waring1.png';
-import waring2 from '../../assets/waring2.png';
-import waring10 from '../../assets/waring10.png';
+import waring from '../../assets/warm.png';
+import waring1 from '../../assets/warm1.png';
+import waring2 from '../../assets/warm2.png';
+import waring10 from '../../assets/warm10+.png';
 import moment from "moment";
+import { Button ,InputNumber} from "quant-ui";
 
 
 function randomData() {
@@ -27,7 +28,7 @@ function getLineData(data) {
         })
         if (index !== arr.length - 1) {
             lineData.push({
-                value: [arr[index + 1].value[0],arr[index].value[1]]
+                value: [arr[index + 1].value[0], arr[index].value[1]]
             })
         }
     })
@@ -47,11 +48,11 @@ let config = {
         data: ["买", "卖", "成交"]
     },
     grid: [{
-        
-    },{
+
+    }, {
 
     }],
-    yAxis: [{ name: "价格"},{ name: "价格222",gridIndex:1,show:false}],
+    yAxis: [{ name: "价格" }, { name: "价格222", gridIndex: 1, show: false }],
     xAxis: [{
         type: "time",
         name: "时间",
@@ -61,17 +62,17 @@ let config = {
                 return moment(value).format("YY-MM-DD HH:mm:ss");
             }
         }
-    },{
+    }, {
         type: "time",
-        show:false,
-        gridIndex:1,
-        
+        show: false,
+        gridIndex: 1,
+
     }],
     toolbox: {
         feature: {
-            dataZoom:{
-                xAxisIndex:[0,1],
-                yAxisIndex:0,
+            dataZoom: {
+                xAxisIndex: [0, 1],
+                yAxisIndex: 0,
             },
             saveAsImage: {},
             restore: {}
@@ -79,28 +80,31 @@ let config = {
     },
     dataZoom: [{
         type: "inside",
-        filterMode: 'none'
+        filterMode: 'none',
+        index:0
     }, {
         show: true,
+        index:1,
         bottom: 10,
         type: 'slider',
-        start: 30,
-        end: 100,
-        xAxisIndex:[0,1]
+        xAxisIndex: [0, 1]
         // bottom: 10,
         // handleIcon: 'M10.7,11.9H9.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4h1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z',
         // handleSize: '105%'
-    },{
+    }, {
         show: true,
         type: 'slider',
-        orient:"vertical"
+        index:2,
+        orient: "vertical",
+        startValue: 81,
+        endValue: 121,
         // bottom: 10,
         // handleIcon: 'M10.7,11.9H9.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4h1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z',
         // handleSize: '105%'
     }],
     tooltip: {
         trigger: 'item',
-        formatter:  (params) => {
+        formatter: (params) => {
             if (params.seriesName == "waring") {
                 return `<div style="padding: 20px;">
                     <h2 style="color: #FFFFFF;">Alert Details</h2>
@@ -150,8 +154,8 @@ let config = {
             borderColor: "#0066CC",
             borderWidth: 1,
         },
-        xAxisIndex:0,
-        yAxisIndex:0,
+        xAxisIndex: 0,
+        yAxisIndex: 0,
         emphasis: {
             show: true,
             itemStyle: {
@@ -174,8 +178,8 @@ let config = {
             borderColor: "#FF3300",
             borderWidth: 1,
         },
-        xAxisIndex:0,
-        yAxisIndex:0,
+        xAxisIndex: 0,
+        yAxisIndex: 0,
         emphasis: {
             show: true,
             itemStyle: {
@@ -199,8 +203,8 @@ let config = {
             borderColor: "#92D050",
             borderWidth: 1,
         },
-        xAxisIndex:0,
-        yAxisIndex:0,
+        xAxisIndex: 0,
+        yAxisIndex: 0,
         emphasis: {
             show: true,
             itemStyle: {
@@ -208,6 +212,21 @@ let config = {
                 shadowColor: '#92D050',
                 shadowOffsetY: 2,
             }
+        },
+        markLine: {
+            silent: true,
+            lineStyle: {
+                color: "#000000"
+            },
+            label: {
+                formatter: (params) => {
+                    return `   ${params.name}:${params.value}`
+                }
+            },
+            data: [
+                { name: '最新价', yAxis: 101 }
+            ],
+            animation: false
         }
         // ,symbolSize:function(data){
         //     return data[2]/5
@@ -218,16 +237,16 @@ let config = {
         data: [],
         symbolKeepAspect: true,
         z: 1,
-        xAxisIndex:1,
-        yAxisIndex:1,
+        xAxisIndex: 1,
+        yAxisIndex: 1,
         type: 'scatter',
         symbol: "image://" + waring
     }, {
         name: "line",
         data: [],
         z: 1,
-        xAxisIndex:0,
-        yAxisIndex:0,
+        xAxisIndex: 0,
+        yAxisIndex: 0,
         hoverAnimation: false,
         legendHoverLink: false,
         type: 'line',
@@ -347,6 +366,9 @@ class Member extends Component {
         super(props)
         this.myChart = null;
         this.resize = null;
+        this.state = {
+            value:20
+        }
     }
     saveEchartsToModels = (myChart) => {
         const { item, dispatch, echartsArray } = this.props;
@@ -391,8 +413,6 @@ class Member extends Component {
         this.myChart.setOption(option(data, data1, data2));
         this.myChart.on('legendselectchanged', (params) => {
             if (params.name == "成交") {
-                let falg = params["selected"]["成交"]
-
                 this.myChart.dispatchAction({
                     type: 'legendToggleSelect',
                     // 图例名称
@@ -400,15 +420,36 @@ class Member extends Component {
                 })
             }
         });
+        this.myChart.on('datazoom', (params) => {
+            console.log("**********", params)
+        });
+
         window.addEventListener("resize", this.resize);
     }
     componentWillUnmount = () => {
         window.removeEventListener("resize", this.resize);
     }
+    btnClick = () => {
+        let that = this;
+        try {
+            that.myChart.dispatchAction({
+                type: 'dataZoom',
+                dataZoomIndex: 2,
+                startValue: 101 - this.state.value||0,
+                endValue: 101 + this.state.value||0
+            })
+        } catch (error) {
+            
+        }
+    }
     render() {
-
         return (
-            <div id="analytics-trade-view" style={{ width: "100%", height: `calc(100% - 36px)` }}>
+            <div className="analytics-trade-view" style={{ width: "100%", height: `100%` }}>
+                <div className="left-content">
+                    价格区间: 　<Button size={"small"} type="primary">　涨跌幅　</Button>　<InputNumber min={1} max={100000} defaultValue={20} value={this.state.value} onChange={(value)=>{this.setState({value})}}  size={"small"}/>　<Button size={"small"} type="primary" onClick={this.btnClick}>　价格档位　</Button>
+                </div>
+                <div id="analytics-trade-view" style={{ width: "100%", height: `100%` }}>
+                </div>
             </div>
         );
     }

@@ -2,8 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'dva';
 import Sandbox from "./sandbox";
 import SellSide from "./sellSide";
+import SellSidexz from "./sellSidexz";
+import SellSidem from "./sellSidem";
 import { Form, Input, Button, Select, DatePicker } from "quant-ui"
 import GridContent from "../../components/GridContent"
+import "./index.less";
 const FormItem = Form.Item;
 const Option = Select.Option;
 const { RangePicker } = DatePicker;
@@ -12,7 +15,9 @@ class Member2 extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            titles: ["成交视图", "卖", "汇总", "买"]
+            titles: ["成交视图", "卖", "汇总", "买"],
+            lableArray:[{name:"PF1872",id:"1"}],
+            lableSelect:1
         }
     }
     onLayoutChange = () => {
@@ -30,12 +35,18 @@ class Member2 extends Component {
                 return <SellSide key={l.i} />
                 break;
             case "2":
-                return <SellSide key={l.i} />
+                return <SellSidexz key={l.i} />
                 break;
             case "3":
-                return <SellSide key={l.i} />
+                return <SellSidem key={l.i} />
                 break;
         }
+    }
+    ontagClose = (lableArray,lableSelect) => {
+        this.setState({
+            lableArray,
+            lableSelect
+        })
     }
     render() {
         let { form: { getFieldDecorator } } = this.props;
@@ -103,6 +114,9 @@ class Member2 extends Component {
                     name="analytics"
                     titles={this.state.titles}
                     onLayoutChange={this.onLayoutChange}
+                    lableArray = { this.state.lableArray}
+                    lableSelect ={ this.state.lableSelect}
+                    ontagClose={this.ontagClose}
                     defaultLayouts={
                         {
                             lg: [

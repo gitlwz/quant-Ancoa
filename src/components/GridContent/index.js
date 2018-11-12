@@ -4,12 +4,16 @@ import map from "lodash/map"
 import GridCard from "../GridCard/index.js"
 import "../grid-layout/styles.less";
 import { WidthProvider, Responsive } from "../grid-layout/react-grid-layout.min";
-import { Button } from "quant-ui"
+import { Button,Tag ,Icon } from "quant-ui"
 import "./index.less";
+const { CheckableTag } = Tag;
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 class Member extends Component {
-    static defaultProps  = {
-        onLayoutChange:()=>{}
+    static defaultProps = {
+        onLayoutChange: () => { },
+        lableArray:[],
+        lableSelect:3,
+        ontagClose:()=>{}
     }
     constructor(props) {
         super(props)
@@ -21,7 +25,7 @@ class Member extends Component {
     }
     //还原布局
     rollback = () => {
-        let layouts =  this.props.defaultLayouts;
+        let layouts = this.props.defaultLayouts;
         if (!layouts.md) {
             layouts.md = layouts.lg;
         }
@@ -32,8 +36,8 @@ class Member extends Component {
             layouts.xs = layouts.sm;
         }
         this.setState({
-            toolbox:[],
-            layouts:layouts
+            toolbox: [],
+            layouts: layouts
         })
         saveToLS(this.props.name, layouts);
         saveToLS(this.props.name + "-toolbox", []);
@@ -94,7 +98,7 @@ class Member extends Component {
     //添加
     onTakeItem = item => {
         this.setState(prevState => {
-            let toolbox = prevState.toolbox.filter((ele)=>ele.i !==item.i);
+            let toolbox = prevState.toolbox.filter((ele) => ele.i !== item.i);
             saveToLS(this.props.name + "-toolbox", toolbox);
             return {
                 toolbox: toolbox,
@@ -118,7 +122,6 @@ class Member extends Component {
                     ]
                 }
             }
-
         });
     };
     renderItem = () => {
@@ -137,16 +140,34 @@ class Member extends Component {
             currentBreakpoint: breakpoint,
         }));
     }
+    ontagClose = (e,id) => {
+        let newArray = this.props.lableArray.filter((ele)=>ele.id != id);
+        this.props.ontagClose(newArray,newArray.length > 0?newArray[newArray.length - 1].id:null)
+        e.preventDefault();
+        e.stopPropagation();
+    }
+    tagChange = (id) => {
+        this.props.ontagClose(this.props.lableArray,id)
+    }
     render() {
         let item = this.state.toolbox || []
         return (
             <div>
                 <div className="react-grid-buttons">
-                    {item.map((ele, index, arr) => {
-                        return <Button type="dashed" key={ele.i} onClick={() => this.onTakeItem(ele)}>{this.props.titles[ele.i]}</Button>
-                    })}
-                    <Button onClick={this.rollback} icon="rollback" style={{marginRight:"10px",float:"right"}}>还原布局</Button>
-                    <div style={{clear:"both"}}></div>
+                    <div style={{float:"left",marginLeft: "10px",lineHeight:"32px"}}>
+                        {
+                            this.props.lableArray.map((ele,index)=>{
+                                return <CheckableTag key={index} className="react-grid-tag" onChange={()=>this.tagChange(ele.id)} checked={ele.id == this.props.lableSelect} >{ele.name}<Icon onClick={(e)=>this.ontagClose(e,ele.id)} style={{marginLeft:"6px",marginRight:"-10px",color:ele.id == this.props.lableSelect?"#ffffff":""}} type="close" /></CheckableTag>
+                            })
+                        }
+                    </div>
+                    <Button onClick={this.rollback} icon="rollback" style={{ marginRight: "10px", float: "right" }}>还原布局</Button>
+                    <div style={{ float: "right" }}>
+                        {item.map((ele, index, arr) => {
+                            return <Button type="dashed" key={ele.i} onClick={() => this.onTakeItem(ele)}>{this.props.titles[ele.i]}</Button>
+                        })}
+                    </div>
+                    <div style={{ clear: "both" }}></div>
                 </div>
                 <ResponsiveReactGridLayout
                     className="layout"

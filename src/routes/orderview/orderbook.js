@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
 import echarts from 'echarts';
+import { Icon } from "quant-ui"
+import MyIcon from "../../components/MyIcon"
 let colorPalette = [
     '#2ec7c9', '#b6a2de', '#5ab1ef', '#ffb980', '#d87a80',
     '#8d98b3', '#e5cf0d', '#97b552', '#95706d', '#dc69aa',
@@ -22,7 +24,7 @@ let option = {
             let htm = ""
             if (params.length > 0) {
                 htm = `<div style="border-bottom: 1px solid rgba(255,255,255,.3); font-size: 18px;padding-bottom: 7px;margin-bottom: 7px">
-                    Price${params[0].name}
+                    Price　${params[0].name}
                             </div>`;
                 params.forEach((ele) => {
                     if (!ele.value) return
@@ -32,8 +34,6 @@ let option = {
                     `
                 })
             }
-            console.log("888888", params)
-
             return htm;
         },
         axisPointer: {
@@ -201,14 +201,11 @@ let option = {
     series: [{
         name: 'BID',
         type: 'bar',
-        barGap: 20,
         stack: '入',
-        barWidth: 30,
         label: {
             normal: {
                 show: true,
             },
-
         },
         // itemStyle: {
         //     normal: {
@@ -219,8 +216,6 @@ let option = {
     }, {
         name: 'BID2',
         type: 'bar',
-        barGap: 20,
-        barWidth: 30,
         stack: '入',
         label: {
             normal: {
@@ -236,9 +231,7 @@ let option = {
     }, {
         name: 'ASK',
         type: 'bar',
-        barGap: 20,
         stack: '出',
-        barWidth: 30,
         xAxisIndex: 2,
         yAxisIndex: 2,
 
@@ -252,8 +245,6 @@ let option = {
         name: 'ASK2',
         type: 'bar',
         stack: '出',
-        barGap: 20,
-        barWidth: 30,
         xAxisIndex: 2,
         yAxisIndex: 2,
 
@@ -267,8 +258,6 @@ let option = {
         name: 'ASK2',
         type: 'bar',
         stack: '出',
-        barGap: 20,
-        barWidth: 30,
         xAxisIndex: 2,
         yAxisIndex: 2,
 
@@ -282,8 +271,6 @@ let option = {
         name: 'ASK2',
         type: 'bar',
         stack: '出',
-        barGap: 20,
-        barWidth: 30,
         xAxisIndex: 2,
         yAxisIndex: 2,
 
@@ -297,8 +284,6 @@ let option = {
         name: 'ASK2',
         type: 'bar',
         stack: '出',
-        barGap: 20,
-        barWidth: 30,
         xAxisIndex: 2,
         yAxisIndex: 2,
 
@@ -312,8 +297,6 @@ let option = {
         name: 'ASK2',
         type: 'bar',
         stack: '出',
-        barGap: 20,
-        barWidth: 30,
         xAxisIndex: 2,
         yAxisIndex: 2,
 
@@ -359,27 +342,37 @@ class Member extends Component {
         this.saveEchartsToModels(this.myChart)
         window.addEventListener("resize", this.resize);
 
-        setTimeout(()=>{
+        setTimeout(() => {
             this.myChart.setOption({
-                series:[
+                series: [
                     {
-                        data:["", "", "", "", "", "", "", "", "", "", "55", "300", "150", "", "", "", "", "", "30", "", ""],
-                    },{
+                        data: ["", "", "", "", "", "", "", "", "", "", "55", "300", "150", "", "", "", "", "", "30", "", ""],
+                    }, {
 
-                    },{
-                        data:["", "", "", "", "", "", "", "", "", "", "", "", "300", "", "", "240", "", "", "", "", ""],
+                    }, {
+                        data: ["", "", "", "", "", "", "", "", "", "", "", "", "300", "", "", "240", "", "", "", "", ""],
                     }
                 ]
             })
-        },2000)
+        }, 2000)
     }
     componentWillUnmount = () => {
         window.removeEventListener("resize", this.resize);
     }
     render() {
         return (
-            <div id="orderview-trade-view" style={{ width: "100%", height: `100%` }}>
+            <div className="orderview-trade-view" >
+                <div className="orderbook-view">
+                    <MyIcon type="icon-bofang" />
+                    <MyIcon type="icon-weibiaoti--" />
+                    <Icon type="caret-left" />
+                    <Icon type="caret-right" />
+                    <MyIcon type="icon-11" />
+                </div>
+                <div id="orderview-trade-view" style={{ width: "100%", height: `100%` }}>
+                </div>
             </div>
+
         );
     }
 }

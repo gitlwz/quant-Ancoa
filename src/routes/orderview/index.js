@@ -15,7 +15,9 @@ class Member extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            titles: ["Transactions", "订单薄", "卖", "汇总", "买"]
+            titles: ["Transactions", "订单薄", "卖", "汇总", "买"],
+            lableArray:[{name:"PF1872",id:"1"},{name:"PF1871",id:"2"}],
+            lableSelect:1
         }
     }
     onLayoutChange = () => {
@@ -37,6 +39,13 @@ class Member extends Component {
         } else if (item.i == 4) {
             return <SellSide item={item} />
         }
+    }
+    ontagClose = (lableArray,lableSelect) => {
+        console.log("*********",lableArray,lableSelect)
+        this.setState({
+            lableArray,
+            lableSelect
+        })
     }
     render() {
         let { form: { getFieldDecorator } } = this.props;
@@ -104,6 +113,9 @@ class Member extends Component {
                     name="orderview"
                     titles={this.state.titles}
                     onLayoutChange={this.onLayoutChange}
+                    lableArray = { this.state.lableArray}
+                    lableSelect ={ this.state.lableSelect}
+                    ontagClose={this.ontagClose}
                     defaultLayouts={
                         {
                             lg: [
