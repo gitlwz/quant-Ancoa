@@ -14,9 +14,6 @@ const dataSource = [{
     key: "价格区间",
     value: "1"
 }, {
-    key: "最优价",
-    value: "1157.75"
-}, {
     key: "订单笔数",
     value: "8"
 }, {

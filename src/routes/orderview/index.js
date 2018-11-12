@@ -6,6 +6,8 @@ import Transactions from "./Transactions";
 import OrderBook from "./orderbook"
 import Orderbooktable from "./orderbooktable"
 import SellSide from "./sellSide";
+import SellSidehz from "./sellSidehz";
+import SellSidhm from "./sellSidehm";
 import GridContent from "../../components/GridContent"
 const FormItem = Form.Item;
 const Option = Select.Option;
@@ -34,10 +36,9 @@ class Member extends Component {
         } else if (item.i == 2) {
             return <SellSide item={item} />
         } else if (item.i == 3) {
-            return <SellSide item={item} />
-
+            return <SellSidehz item={item} />
         } else if (item.i == 4) {
-            return <SellSide item={item} />
+            return <SellSidhm item={item} />
         }
     }
     ontagClose = (lableArray,lableSelect) => {
