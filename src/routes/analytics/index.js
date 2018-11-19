@@ -17,7 +17,8 @@ class Member2 extends Component {
         this.state = {
             titles: ["成交视图", "卖", "汇总", "买"],
             lableArray:[{name:"PF1872",id:"1"}],
-            lableSelect:1
+            lableSelect:1,
+            show:true,
         }
     }
     onLayoutChange = () => {
@@ -27,6 +28,9 @@ class Member2 extends Component {
         })
     }
     renderItem = (l) => {
+        if(!this.state.show){
+            return null;
+        }
         switch (l.i) {
             case "0":
                 return <Sandbox item ={l}/>
@@ -43,9 +47,18 @@ class Member2 extends Component {
         }
     }
     ontagClose = (lableArray,lableSelect) => {
+        if(lableArray.length === 0){
+            this.setState({
+                lableArray,
+                lableSelect,
+                show:false
+            })
+            return
+        }
         this.setState({
             lableArray,
-            lableSelect
+            lableSelect,
+            show:true
         })
     }
     render() {
